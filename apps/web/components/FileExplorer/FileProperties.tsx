@@ -127,7 +127,7 @@ const FileProperties: FC<FilePropertiesProps> = ({ file, onClose }) => {
 
         <div className="flex justify-end">
           <button
-            className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700"
+            className="px-4 py-2 bg-brand-600 text-white rounded-md hover:bg-brand-700"
             onClick={onClose}
           >
             Close

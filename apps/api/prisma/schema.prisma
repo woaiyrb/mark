@@ -305,6 +305,7 @@ model Assignment {
   versions         AssignmentVersion[] @relation("AssignmentVersions")
   versionHistory   VersionHistory[]
   drafts           AssignmentDraft[]
+  classes          AssignmentClass[]
 }
 
 model AssignmentFile {
@@ -462,6 +463,7 @@ model Question {
 
   GradingAudit GradingAudit[]
   GradingCache GradingCache[]
+  knowledgePoints QuestionKnowledgePoint[]
 }
 
 model AssignmentAttempt {
@@ -1052,4 +1054,123 @@ model FileUpload {
   @@index([userId])
   @@index([userId, storageKey])
   @@index([status])
+}
+
+// ---------------------------------------------------------------------------
+// 小学数学场景扩展：班级 / 名单 / 知识点
+// ---------------------------------------------------------------------------
+
+enum ClassTeacherRole {
+  OWNER /// 班级创建者
+  COLLABORATOR /// 协作教师
+}
+
+enum EnrollmentStatus {
+  ACTIVE /// 在读
+  TRANSFERRED_OUT /// 已转出
+  INACTIVE /// 已停用
+}
+
+model Class {
+  id          Int      @id @default(autoincrement())
+  name        String
+  classCode   String?  @unique /// 班级码，学生用它加入班级
+  subject     String? /// 学科，如 "数学"
+  term        String? /// 学期，如 "2026-秋"
+  gradeLevel  String? /// 年级，如 "三年级"
+  ownerUserId String /// 创建该班级的老师
+  isArchived  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  teachers    ClassTeacher[]
+  enrollments ClassEnrollment[]
+  assignments AssignmentClass[]
+
+  @@index([ownerUserId])
+  @@index([isArchived])
+  @@index([subject, term])
+}
+
+model ClassTeacher {
+  id        Int              @id @default(autoincrement())
+  classId   Int
+  userId    String
+  role      ClassTeacherRole @default(COLLABORATOR)
+  canEdit   Boolean          @default(true)
+  createdAt DateTime         @default(now())
+
+  class Class @relation(fields: [classId], references: [id], onDelete: Cascade)
+
+  @@unique([classId, userId])
+  @@index([userId])
+}
+
+model ClassEnrollment {
+  id          Int              @id @default(autoincrement())
+  classId     Int
+  userId      String
+  studentNo   String? /// 学号
+  displayName String? /// 班级内显示名（如"小明"）
+  status      EnrollmentStatus @default(ACTIVE)
+  joinedAt    DateTime         @default(now())
+  leftAt      DateTime?
+
+  class Class @relation(fields: [classId], references: [id], onDelete: Cascade)
+
+  @@unique([classId, userId])
+  @@index([classId, status])
+  @@index([userId])
+}
+
+model AssignmentClass {
+  id           Int        @id @default(autoincrement())
+  assignmentId Int
+  classId      Int
+  assignedAt   DateTime   @default(now())
+  dueAt        DateTime? /// 截止时间的作业级覆盖值
+
+  assignment Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  class      Class      @relation(fields: [classId], references: [id], onDelete: Cascade)
+
+  @@unique([assignmentId, classId])
+  @@index([assignmentId])
+  @@index([classId])
+}
+
+model KnowledgePoint {
+  id          Int      @id @default(autoincrement())
+  name        String /// 如 "100以内加减法"
+  code        String?  @unique /// 知识点编码，便于对接教材体系
+  parentId    Int? /// 父知识点，构成树状层级
+  subject     String?
+  level       Int      @default(1) /// 层级深度，1 为顶层
+  ownerUserId String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  parent    KnowledgePoint?         @relation("KnowledgePointHierarchy", fields: [parentId], references: [id], onDelete: SetNull)
+  children  KnowledgePoint[]        @relation("KnowledgePointHierarchy")
+  questions QuestionKnowledgePoint[]
+
+  @@index([parentId])
+  @@index([subject, isActive])
+  @@index([ownerUserId])
+}
+
+model QuestionKnowledgePoint {
+  id               Int      @id @default(autoincrement())
+  questionId       Int
+  knowledgePointId Int
+  weight           Float    @default(1) /// 该题对此知识点的考查权重
+  isPrimary        Boolean  @default(false) /// 是否为主要考查点
+  createdAt        DateTime @default(now())
+
+  question       Question       @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  knowledgePoint KnowledgePoint @relation(fields: [knowledgePointId], references: [id], onDelete: Cascade)
+
+  @@unique([questionId, knowledgePointId])
+  @@index([knowledgePointId])
+ 
 }

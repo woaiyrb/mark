@@ -447,7 +447,7 @@ export function BottomVersionBar() {
                           tabIndex={0}
                           className={`w-full p-4 rounded-xl border text-left transition-all duration-200 group relative overflow-hidden ${
                             isWorking
-                              ? "border-indigo-300 dark:border-indigo-700 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/30 dark:to-purple-900/30 shadow-md"
+                              ? "border-indigo-300 dark:border-indigo-700 bg-gradient-to-r from-indigo-50 to-brand-50 dark:from-indigo-900/30 dark:to-brand-900/30 shadow-md"
                               : "border-gray-200/60 dark:border-gray-700/60 hover:border-indigo-200 dark:hover:border-indigo-700 hover:bg-gradient-to-r hover:from-gray-50/50 hover:to-blue-50/30 dark:hover:from-gray-800/50 dark:hover:to-blue-900/20 hover:shadow-sm"
                           }`}
                         >

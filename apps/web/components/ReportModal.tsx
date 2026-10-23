@@ -94,7 +94,7 @@ const ReportModal: FC<{
                   Issue Type
                 </label>
                 <select
-                  className="w-full p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="w-full p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
                   value={issueType}
                   onChange={(e) =>
                     setReportIssueType(e.target.value as REPORT_TYPE)
@@ -119,7 +119,7 @@ const ReportModal: FC<{
                   Description of the issue
                 </label>
                 <textarea
-                  className="w-full p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="w-full p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
                   rows={5}
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}

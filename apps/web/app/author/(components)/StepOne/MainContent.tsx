@@ -4,6 +4,7 @@ import animationData from "@/animations/LoadSN.json";
 import LoadingPage from "@/app/loading";
 import MarkdownEditor from "@/components/MarkDownEditor";
 import { useAuthorStore } from "@/stores/author";
+import { ClipboardCheck, FileText, ListChecks } from "lucide-react";
 import { SectionWithTitle } from "../ReusableSections/SectionWithTitle";
 import React from "react";
 
@@ -65,8 +66,9 @@ const MainContent = () => {
   }
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-6">
       <SectionWithTitle
+        IconForTitle={FileText}
         title={stepOneSections.introduction.title}
         description={stepOneSections.introduction.description}
         required={stepOneSections.introduction.required}
@@ -76,9 +78,11 @@ const MainContent = () => {
           value={introduction}
           setValue={setIntroduction}
           placeholder={stepOneSections.introduction.placeholder}
+          toolbarMode="minimal"
         />
       </SectionWithTitle>
       <SectionWithTitle
+        IconForTitle={ListChecks}
         title={stepOneSections.instructions.title}
         description={stepOneSections.instructions.description}
         required={stepOneSections.instructions.required}
@@ -88,9 +92,11 @@ const MainContent = () => {
           value={instructions}
           setValue={setInstructions}
           placeholder={stepOneSections.instructions.placeholder}
+          toolbarMode="minimal"
         />
       </SectionWithTitle>
       <SectionWithTitle
+        IconForTitle={ClipboardCheck}
         title={stepOneSections.overview.title}
         description={stepOneSections.overview.description}
         required={stepOneSections.overview.required}
@@ -100,6 +106,7 @@ const MainContent = () => {
           value={gradingCriteriaOverview}
           setValue={setGradingCriteriaOverview}
           placeholder={stepOneSections.overview.placeholder}
+          toolbarMode="minimal"
         />
       </SectionWithTitle>
     </div>

@@ -161,7 +161,7 @@ const UserReportsPanel: React.FC<UserReportsProps> = ({
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "OPEN":
-        return <ClockIcon className="w-5 h-5 text-purple-500" />;
+        return <ClockIcon className="w-5 h-5 text-brand-500" />;
       case "IN_PROGRESS":
         return <ArrowPathIcon className="w-5 h-5 text-yellow-500" />;
       case "RESOLVED":
@@ -176,7 +176,7 @@ const UserReportsPanel: React.FC<UserReportsProps> = ({
   const getStatusClass = (status: string) => {
     switch (status) {
       case "OPEN":
-        return "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200";
+        return "bg-brand-100 text-brand-800 dark:bg-brand-900 dark:text-brand-200";
       case "IN_PROGRESS":
         return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200";
       case "RESOLVED":
@@ -260,7 +260,7 @@ const UserReportsPanel: React.FC<UserReportsProps> = ({
 
       {loading ? (
         <div className="flex flex-col items-center p-12">
-          <div className="animate-spin h-12 w-12 border-b-2 border-purple-500 rounded-full" />
+          <div className="animate-spin h-12 w-12 border-b-2 border-brand-500 rounded-full" />
           <p className="mt-4 text-gray-600 dark:text-gray-400">
             Loading your reports...
           </p>
@@ -280,7 +280,7 @@ const UserReportsPanel: React.FC<UserReportsProps> = ({
         <div className="space-y-4 animate-fadeIn">
           <button
             onClick={() => setSelectedReport(null)}
-            className="text-purple-500 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 flex items-center p-2 rounded-md hover:bg-purple-50 dark:hover:bg-purple-900/30 transition-colors"
+            className="text-brand-500 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300 flex items-center p-2 rounded-md hover:bg-brand-50 dark:hover:bg-brand-900/30 transition-colors"
           >
             <ArrowLeftIcon className="w-4 h-4 mr-2" /> Back to all reports
           </button>
@@ -325,7 +325,7 @@ const UserReportsPanel: React.FC<UserReportsProps> = ({
                 <h4 className="text-gray-600 dark:text-gray-400 font-medium mb-2">
                   Status Update
                 </h4>
-                <div className="p-4 bg-purple-50 dark:bg-purple-900/30 rounded-md border border-purple-200 dark:border-purple-800 text-purple-800 dark:text-purple-200">
+                <div className="p-4 bg-brand-50 dark:bg-brand-900/30 rounded-md border border-brand-200 dark:border-brand-800 text-brand-800 dark:text-brand-200">
                   {selectedReport.statusMessage}
                 </div>
               </div>
@@ -339,7 +339,7 @@ const UserReportsPanel: React.FC<UserReportsProps> = ({
                     Developer Comments
                   </div>
                 </h4>
-                <div className="p-4 bg-purple-50 dark:bg-purple-900/30 rounded-md border border-purple-200 dark:border-purple-800 text-purple-800 dark:text-purple-200">
+                <div className="p-4 bg-brand-50 dark:bg-brand-900/30 rounded-md border border-brand-200 dark:border-brand-800 text-brand-800 dark:text-brand-200">
                   {formatComments(selectedReport.comments)}
                 </div>
               </div>
@@ -454,13 +454,13 @@ const UserReportsPanel: React.FC<UserReportsProps> = ({
                 placeholder="Search reports…"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4 py-2 w-full border rounded-md bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
+                className="pl-10 pr-4 py-2 w-full border rounded-md bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
               />
             </div>
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="py-2 px-3 border rounded-md bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
+              className="py-2 px-3 border rounded-md bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
             >
               <option value="ALL">All Statuses</option>
               <option value="OPEN">Open</option>
@@ -501,7 +501,7 @@ const UserReportsPanel: React.FC<UserReportsProps> = ({
                       setStatusFilter("ALL");
                       setSearchQuery("");
                     }}
-                    className="mt-4 px-4 py-2 text-sm text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300"
+                    className="mt-4 px-4 py-2 text-sm text-brand-600 dark:text-brand-400 hover:text-brand-800 dark:hover:text-brand-300"
                   >
                     Clear filters
                   </button>
@@ -559,7 +559,7 @@ const UserReportsPanel: React.FC<UserReportsProps> = ({
                           </span>
                           {report.comments && (
                             <ChatBubbleBottomCenterTextIcon
-                              className="w-4 h-4 text-purple-500"
+                              className="w-4 h-4 text-brand-500"
                               title="Has developer comments"
                             />
                           )}
@@ -588,7 +588,7 @@ const UserReportsPanel: React.FC<UserReportsProps> = ({
                 <div className="text-center mt-4">
                   <button
                     onClick={() => setVisibleCount((c) => c + ITEMS_PER_CHUNK)}
-                    className="px-4 py-2 bg-purple-500 text-white rounded-md hover:bg-purple-600 transition"
+                    className="px-4 py-2 bg-brand-500 text-white rounded-md hover:bg-brand-600 transition"
                   >
                     Load More
                   </button>

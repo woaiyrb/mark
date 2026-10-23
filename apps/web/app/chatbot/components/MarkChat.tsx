@@ -244,7 +244,7 @@ const SuggestionsPanel = ({
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.05 }}
             onClick={() => insertSuggestion(suggestion)}
-            className="flex-shrink-0 px-3 py-1.5 text-xs bg-gray-100 dark:bg-gray-800 hover:bg-purple-100 dark:hover:bg-purple-900/30 text-gray-700 dark:text-gray-300 hover:text-purple-700 dark:hover:text-purple-300 rounded-full transition-colors"
+            className="flex-shrink-0 px-3 py-1.5 text-xs bg-gray-100 dark:bg-gray-800 hover:bg-brand-100 dark:hover:bg-brand-900/30 text-gray-700 dark:text-gray-300 hover:text-brand-700 dark:hover:text-brand-300 rounded-full transition-colors"
           >
             {suggestion}
           </motion.button>
@@ -322,7 +322,7 @@ const QuestionSelector = ({
     <div className="px-4 py-2 mb-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md">
       <div className="flex items-center justify-between">
         <div className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
-          <ChatBubbleOvalLeftEllipsisIcon className="w-4 h-4 text-purple-500" />
+          <ChatBubbleOvalLeftEllipsisIcon className="w-4 h-4 text-brand-500" />
           Question Focus
         </div>
         <select
@@ -395,7 +395,7 @@ const SpecialActionUI = ({
         </div>
       ) : specialActions.type === "create" ? (
         <div className="flex flex-col gap-2">
-          <div className="flex items-center gap-2 text-purple-700 dark:text-purple-400">
+          <div className="flex items-center gap-2 text-brand-700 dark:text-brand-400">
             <PlusCircleIcon className="w-5 h-5" />
             <h4 className="text-sm font-medium">Create a Question</h4>
           </div>
@@ -408,9 +408,9 @@ const SpecialActionUI = ({
               onClick={() => handleCreateQuestion("multiple-choice")}
               className={`text-xs py-1.5 px-3 ${
                 specialActions.data?.suggestedType === "multiple-choice"
-                  ? "bg-purple-200 text-purple-900 dark:bg-purple-700 dark:text-purple-100"
-                  : "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200"
-              } hover:bg-purple-200 dark:hover:bg-purple-800 rounded-md transition-colors`}
+                  ? "bg-brand-200 text-brand-900 dark:bg-brand-700 dark:text-brand-100"
+                  : "bg-brand-100 text-brand-800 dark:bg-brand-900 dark:text-brand-200"
+              } hover:bg-brand-200 dark:hover:bg-brand-800 rounded-md transition-colors`}
             >
               Multiple Choice
             </button>
@@ -418,9 +418,9 @@ const SpecialActionUI = ({
               onClick={() => handleCreateQuestion("true/false")}
               className={`text-xs py-1.5 px-3 ${
                 specialActions.data?.suggestedType === "true/false"
-                  ? "bg-purple-200 text-purple-900 dark:bg-purple-700 dark:text-purple-100"
-                  : "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200"
-              } hover:bg-purple-200 dark:hover:bg-purple-800 rounded-md transition-colors`}
+                  ? "bg-brand-200 text-brand-900 dark:bg-brand-700 dark:text-brand-100"
+                  : "bg-brand-100 text-brand-800 dark:bg-brand-900 dark:text-brand-200"
+              } hover:bg-brand-200 dark:hover:bg-brand-800 rounded-md transition-colors`}
             >
               True/False
             </button>
@@ -428,9 +428,9 @@ const SpecialActionUI = ({
               onClick={() => handleCreateQuestion("text response")}
               className={`text-xs py-1.5 px-3 ${
                 specialActions.data?.suggestedType === "text response"
-                  ? "bg-purple-200 text-purple-900 dark:bg-purple-700 dark:text-purple-100"
-                  : "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200"
-              } hover:bg-purple-200 dark:hover:bg-purple-800 rounded-md transition-colors`}
+                  ? "bg-brand-200 text-brand-900 dark:bg-brand-700 dark:text-brand-100"
+                  : "bg-brand-100 text-brand-800 dark:bg-brand-900 dark:text-brand-200"
+              } hover:bg-brand-200 dark:hover:bg-brand-800 rounded-md transition-colors`}
             >
               Text Response
             </button>
@@ -573,12 +573,12 @@ const WelcomeMessage = ({
 
           {!learnerContext.isGradedAssignment &&
             !learnerContext.isFeedbackMode && (
-              <div className="p-3 bg-purple-50 dark:bg-purple-900/30 rounded-lg text-left border border-purple-200 dark:border-purple-800">
-                <h4 className="text-sm font-medium text-purple-800 dark:text-purple-400 mb-2 flex items-center">
+              <div className="p-3 bg-brand-50 dark:bg-brand-900/30 rounded-lg text-left border border-brand-200 dark:border-brand-800">
+                <h4 className="text-sm font-medium text-brand-800 dark:text-brand-400 mb-2 flex items-center">
                   <AcademicCapIcon className="w-4 h-4 mr-1.5" />
                   Practice Mode
                 </h4>
-                <p className="text-xs text-purple-700 dark:text-purple-300">
+                <p className="text-xs text-brand-700 dark:text-brand-300">
                   I can provide detailed hints, explanations, and practice
                   guidance to help you learn effectively.
                 </p>
@@ -600,12 +600,12 @@ const WelcomeMessage = ({
 
       {userRole === "author" && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
-          <div className="p-3 bg-purple-50 dark:bg-purple-900/30 rounded-lg text-left border border-purple-200 dark:border-purple-800">
-            <h4 className="text-sm font-medium text-purple-800 dark:text-purple-400 mb-2 flex items-center">
+          <div className="p-3 bg-brand-50 dark:bg-brand-900/30 rounded-lg text-left border border-brand-200 dark:border-brand-800">
+            <h4 className="text-sm font-medium text-brand-800 dark:text-brand-400 mb-2 flex items-center">
               <SparklesIcon className="w-4 h-4 mr-1.5" />
               Question Creation
             </h4>
-            <p className="text-xs text-purple-700 dark:text-purple-300">
+            <p className="text-xs text-brand-700 dark:text-brand-300">
               I can create multiple choice, true/false, and text response
               questions from your specifications or learning objectives.
             </p>
@@ -762,7 +762,7 @@ const ChatHistoryDrawer = ({
                       onClick={() => onSelectChat(chat.id)}
                       className={`w-full p-3 text-left rounded-lg transition-colors ${
                         currentChatId === chat.id
-                          ? "bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-800"
+                          ? "bg-brand-50 dark:bg-brand-900/30 border border-brand-200 dark:border-brand-800"
                           : "hover:bg-gray-100 dark:hover:bg-gray-800"
                       }`}
                     >
@@ -784,7 +784,7 @@ const ChatHistoryDrawer = ({
                         {new Date(chat.lastActiveAt).toLocaleString()}
                       </div>
                       {chat.assignmentId && (
-                        <div className="text-xs text-purple-600 dark:text-purple-400 mt-1">
+                        <div className="text-xs text-brand-600 dark:text-brand-400 mt-1">
                           Assignment: {chat.assignmentId}
                         </div>
                       )}
@@ -892,7 +892,7 @@ const FileAttachmentChips: React.FC<FileAttachmentChipsProps> = ({
                 ? "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
                 : file.uploadStatus === "waiting"
                   ? "bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300"
-                  : "bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300"
+                  : "bg-brand-100 dark:bg-brand-900/30 text-brand-700 dark:text-brand-300"
           }`}
         >
           <PaperClipIcon className="w-3 h-3" />
@@ -2712,14 +2712,14 @@ Please help me with this.`;
   }, [userRole, authorContext, learnerContext]);
 
   const getAccentColor = useCallback(() => {
-    if (userRole === "author") return "from-purple-600 to-indigo-600";
+    if (userRole === "author") return "from-brand-600 to-indigo-600";
     if (userRole === "learner") {
       if (learnerContext.isFeedbackMode) return "from-orange-600 to-amber-600";
       return learnerContext.isGradedAssignment
         ? "from-amber-600 to-yellow-600"
-        : "from-purple-600 to-cyan-600";
+        : "from-brand-600 to-cyan-600";
     }
-    return "from-purple-600 to-purple-600";
+    return "from-brand-600 to-brand-600";
   }, [userRole, learnerContext]);
 
   const suggestions = React.useMemo(() => {
@@ -2885,17 +2885,17 @@ Please help me with this.`;
         <div className="max-w-[85%] rounded-xl p-3 bg-white dark:bg-gray-800 shadow-md border dark:border-gray-700">
           <div className="flex space-x-1 items-center h-6">
             <div
-              className="w-2 h-2 rounded-full bg-purple-500 dark:bg-purple-400 animate-bounce"
+              className="w-2 h-2 rounded-full bg-brand-500 dark:bg-brand-400 animate-bounce"
               style={{ animationDelay: "0ms" }}
             />
 
             <div
-              className="w-2 h-2 rounded-full bg-purple-500 dark:bg-purple-400 animate-bounce"
+              className="w-2 h-2 rounded-full bg-brand-500 dark:bg-brand-400 animate-bounce"
               style={{ animationDelay: "300ms" }}
             />
 
             <div
-              className="w-2 h-2 rounded-full bg-purple-500 dark:bg-purple-400 animate-bounce"
+              className="w-2 h-2 rounded-full bg-brand-500 dark:bg-brand-400 animate-bounce"
               style={{ animationDelay: "600ms" }}
             />
           </div>
@@ -2996,10 +2996,10 @@ Please help me with this.`;
               </div>
               <button
                 onClick={handleCheckReports}
-                className="p-2 mr-2 rounded-sm transition-colors bg-white dark:bg-gray-800 hover:bg-purple-100 dark:hover:bg-purple-900 border border-gray-300 dark:border-gray-700 shadow-sm"
+                className="p-2 mr-2 rounded-sm transition-colors bg-white dark:bg-gray-800 hover:bg-brand-100 dark:hover:bg-brand-900 border border-gray-300 dark:border-gray-700 shadow-sm"
                 title="Check Reports"
               >
-                <span className="text-sm font-medium text-purple-700 dark:text-purple-300">
+                <span className="text-sm font-medium text-brand-700 dark:text-brand-300">
                   Your Reports
                 </span>
               </button>
@@ -3108,7 +3108,7 @@ Please help me with this.`;
                 <div
                   {...getRootProps()}
                   className={`flex items-center space-x-2 ${
-                    isDragActive ? "ring-2 ring-purple-500 rounded-xl" : ""
+                    isDragActive ? "ring-2 ring-brand-500 rounded-xl" : ""
                   }`}
                 >
                   <input {...getInputProps()} />
@@ -3123,7 +3123,7 @@ Please help me with this.`;
                       isRecording
                         ? "border-red-400 dark:border-red-600"
                         : "dark:border-gray-700"
-                    } rounded-xl bg-white dark:bg-gray-800 resize-none focus:outline-none focus:ring-2 focus:ring-purple-500 min-h-[90px] max-h-[120px]`}
+                    } rounded-xl bg-white dark:bg-gray-800 resize-none focus:outline-none focus:ring-2 focus:ring-brand-500 min-h-[90px] max-h-[120px]`}
                     style={{ maxHeight: "120px", overflowY: "auto" }}
                     disabled={isInitializing}
                   />
@@ -3149,7 +3149,7 @@ Please help me with this.`;
                       onClick={open}
                       className={`relative p-1.5 rounded-full transition-colors ${
                         activeFileCount > 0
-                          ? "bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-400"
+                          ? "bg-brand-100 dark:bg-brand-900 text-brand-600 dark:text-brand-400"
                           : "bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-600 dark:text-gray-300"
                       }`}
                       title={`Attach files (up to ${MAX_FILES_PER_MESSAGE})`}
@@ -3160,7 +3160,7 @@ Please help me with this.`;
                     >
                       <PaperClipIcon className="w-4 h-4" />
                       {activeFileCount > 0 && (
-                        <span className="absolute -top-1 -right-1 bg-purple-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                        <span className="absolute -top-1 -right-1 bg-brand-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
                           {activeFileCount}
                         </span>
                       )}
@@ -3181,8 +3181,8 @@ Please help me with this.`;
                       onClick={() => handleSendWithContext(true)}
                       className={`p-1.5 ${
                         isSendDisabled
-                          ? "bg-purple-400 dark:bg-purple-900 cursor-not-allowed"
-                          : "bg-purple-600 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-800"
+                          ? "bg-brand-400 dark:bg-brand-900 cursor-not-allowed"
+                          : "bg-brand-600 hover:bg-brand-700 dark:bg-brand-700 dark:hover:bg-brand-800"
                       } rounded-full transition-colors`}
                       title="Send message"
                       disabled={isSendDisabled}

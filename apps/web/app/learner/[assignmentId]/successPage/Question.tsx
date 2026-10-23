@@ -779,7 +779,7 @@ const Question: FC<Props> = ({
           href={learnerResponse}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-purple-600 underline break-all"
+          className="text-brand-600 underline break-all"
         >
           {learnerResponse}
         </a>
@@ -955,7 +955,7 @@ const Question: FC<Props> = ({
                           );
                         }
                       }}
-                      className="px-3 py-1 text-sm bg-purple-100 hover:bg-purple-200 text-purple-800 rounded-md transition-colors flex items-center gap-1"
+                      className="px-3 py-1 text-sm bg-brand-100 hover:bg-brand-200 text-brand-800 rounded-md transition-colors flex items-center gap-1"
                     >
                       <svg
                         className="w-4 h-4"
@@ -1212,7 +1212,7 @@ const Question: FC<Props> = ({
       {fileViewer.isLoading && fileViewer.isOpen && (
         <div className="fixed inset-0 z-60 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-xl flex items-center gap-3">
-            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-purple-600"></div>
+            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-brand-600"></div>
             <span className="text-gray-700">Loading file content...</span>
           </div>
         </div>

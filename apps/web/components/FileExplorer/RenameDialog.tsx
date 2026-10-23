@@ -76,7 +76,7 @@ const RenameDialog: React.FC<RenameDialogProps> = ({
             value={newFileName}
             onChange={(e) => setNewFileName(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-brand-500 focus:border-brand-500"
           />
 
           <div className="flex justify-end space-x-3 mt-4">
@@ -89,7 +89,7 @@ const RenameDialog: React.FC<RenameDialogProps> = ({
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700"
+              className="px-4 py-2 bg-brand-600 text-white rounded-md hover:bg-brand-700"
             >
               Rename
             </button>

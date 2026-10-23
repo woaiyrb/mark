@@ -114,8 +114,8 @@ const FolderItem: React.FC<{
       <div
         style={{ marginLeft: `${depth * 16}px` }}
         className={`flex items-center py-1.5 px-2 rounded cursor-pointer hover:bg-gray-100 group ${
-          isCurrentFolder ? "bg-purple-100" : ""
-        } ${isDropTarget ? "bg-purple-50 border border-purple-300" : ""}`}
+          isCurrentFolder ? "bg-brand-100" : ""
+        } ${isDropTarget ? "bg-brand-50 border border-brand-300" : ""}`}
         onContextMenu={(e) => onContextMenu(e, folder)}
       >
         <ChevronToggle

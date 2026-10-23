@@ -56,6 +56,11 @@ export class AppModule implements NestModule {
         { path: "/v1/files{/*splat}", method: RequestMethod.ALL },
         { path: "/v1/admin/translations{/*splat}", method: RequestMethod.ALL },
         { path: "/v2/assignments{/*splat}", method: RequestMethod.ALL },
+        { path: "/v1/classes{/*splat}", method: RequestMethod.ALL },
+        {
+          path: "/v1/knowledge-points{/*splat}",
+          method: RequestMethod.ALL,
+        },
         { path: "/v1/admin-dashboard{/*splat}", method: RequestMethod.GET },
       );
   }

@@ -23,7 +23,7 @@ interface Props extends ComponentPropsWithoutRef<"section"> {
   maxWords?: number | null;
   maxCharacters?: number | null;
   allowCopy?: boolean;
-  toolbarMode?: "full" | "learner";
+  toolbarMode?: "full" | "learner" | "minimal";
 }
 
 const fullToolbarOptions = [
@@ -47,9 +47,19 @@ const learnerToolbarOptions = [
   ["clean"],
 ];
 
+// "minimal" is the spec's essentials-only bar: emphasis, lists, insert, reset
+// — used on the overview cards so the page reads as content, not a CMS.
+const minimalToolbarOptions = [
+  ["bold", "italic", "underline"],
+  [{ list: "bullet" }, { list: "ordered" }],
+  ["link", "image"],
+  ["clean"],
+];
+
 const toolbarOptionsByMode = {
   full: fullToolbarOptions,
   learner: learnerToolbarOptions,
+  minimal: minimalToolbarOptions,
 };
 
 const MarkdownEditor: React.FC<Props> = ({
@@ -220,7 +230,7 @@ const MarkdownEditor: React.FC<Props> = ({
     <div className={cn("quill-editor-shell flex flex-col", className)}>
       <div
         className={cn(
-          "quill-editor overflow-auto p-2 border border-gray-200 dark:border-gray-600 rounded min-h-[100px] focus-within:border-violet-600 focus-within:ring-2 focus-within:ring-violet-100 dark:focus-within:ring-violet-900/40",
+          "quill-editor overflow-auto p-2 border border-gray-200 dark:border-gray-600 rounded-xl min-h-[190px] focus-within:border-brand-500 focus-within:ring-2 focus-within:ring-brand-100 dark:focus-within:ring-brand-900/40",
           textareaClassName,
         )}
         ref={quillRef}

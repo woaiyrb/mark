@@ -351,7 +351,7 @@ const FileUploadModal = ({ onClose, questionId }: FileUploadModalProps) => {
               whileHover={{ scale: 1.02 }}
               className={`flex flex-col items-center justify-center border-2 border-dashed p-6 rounded-md cursor-pointer transition-colors ${
                 isDragActive
-                  ? "border-purple-500 bg-purple-50 dark:bg-purple-900/20"
+                  ? "border-brand-500 bg-brand-50 dark:bg-brand-900/20"
                   : "border-gray-300 dark:border-gray-600"
               }`}
             >
@@ -361,7 +361,7 @@ const FileUploadModal = ({ onClose, questionId }: FileUploadModalProps) => {
                 className="text-gray-500 dark:text-gray-400 mb-4"
               />
               {isDragActive ? (
-                <p className="text-purple-500">Drop the files here...</p>
+                <p className="text-brand-500">Drop the files here...</p>
               ) : (
                 <>
                   <p className="text-gray-500 dark:text-gray-400">
@@ -437,7 +437,7 @@ const FileUploadModal = ({ onClose, questionId }: FileUploadModalProps) => {
                         <p className="text-right text-sm  mb-2">SUCCESS</p>
                         <div className="relative h-1 w-full bg-gray-200 dark:bg-gray-700 rounded">
                           <motion.div
-                            className="absolute h-1 bg-purple-500 rounded"
+                            className="absolute h-1 bg-brand-500 rounded"
                             initial={{ width: "0%" }}
                             animate={{ width: "100%" }}
                             transition={{ duration: 0.5 }}
@@ -905,7 +905,7 @@ const FileUploadModal = ({ onClose, questionId }: FileUploadModalProps) => {
             </pre>
             <button
               onClick={() => setFileInspectorModalOpen(false)}
-              className="mt-4 px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600"
+              className="mt-4 px-4 py-2 bg-brand-500 text-white rounded hover:bg-brand-600"
             >
               Close
             </button>

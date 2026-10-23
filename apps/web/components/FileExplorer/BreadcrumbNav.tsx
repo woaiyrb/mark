@@ -123,7 +123,7 @@ export const BreadcrumbNav: React.FC<BreadcrumbNavProps> = ({
             <button
               className={`flex items-center px-2 py-1 rounded-md text-sm ${
                 index === visible.length - 1
-                  ? "font-medium text-purple-600 bg-purple-50"
+                  ? "font-medium text-brand-600 bg-brand-50"
                   : "text-gray-600 hover:bg-gray-100"
               }`}
               onClick={() => onNavigate(crumb.path)}

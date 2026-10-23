@@ -8,7 +8,7 @@
 import { Injectable, Logger } from "@nestjs/common";
 import * as pdfjs from "pdfjs-dist/legacy/build/pdf.mjs";
 import * as crypto from "node:crypto";
-import { createCanvas } from "canvas";
+import { createCanvas } from "@napi-rs/canvas";
 import type {
   PDFDocumentProxy,
   PDFPageProxy,

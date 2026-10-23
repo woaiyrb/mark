@@ -1,7 +1,7 @@
 "use client";
 
 import {
-  DEFAULT_UI_LANGUAGE,
+  INITIAL_UI_LANGUAGE,
   UI_LANGUAGE_CHANGED_EVENT,
   getStoredUiLanguage,
   isSupportedUiLanguage,
@@ -32,26 +32,22 @@ export function useActiveUiLanguage(): string {
   const search = searchParams.toString();
   const queryLanguage = searchParams.get("uiLang");
   const [activeLanguage, setActiveLanguage] =
-    useState<string>(DEFAULT_UI_LANGUAGE);
+    useState<string>(INITIAL_UI_LANGUAGE);
 
   useEffect(() => {
     const isNewUrl = search !== lastResolvedSearch;
     lastResolvedSearch = search;
 
-    if (isSupportedUiLanguage(queryLanguage) && isNewUrl) {
+    // A `?uiLang` from a shared link must not override the Chinese-only
+    // default — only the initial language is honoured.
+    if (queryLanguage === INITIAL_UI_LANGUAGE && isNewUrl) {
       setActiveLanguage(queryLanguage);
       setStoredUiLanguage(queryLanguage);
       return;
     }
 
     // Already-consumed URL or no query language: storage is authoritative.
-    // The query is only a last resort for a cleared storage.
-    setActiveLanguage(
-      getStoredUiLanguage() ||
-        (isSupportedUiLanguage(queryLanguage)
-          ? queryLanguage
-          : DEFAULT_UI_LANGUAGE),
-    );
+    setActiveLanguage(getStoredUiLanguage() || INITIAL_UI_LANGUAGE);
   }, [search, queryLanguage]);
 
   useEffect(() => {

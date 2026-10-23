@@ -35,7 +35,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
       <button
         className={`p-2 rounded-md ${
           viewMode === "list"
-            ? "bg-gray-100 text-purple-600"
+            ? "bg-gray-100 text-brand-600"
             : "text-gray-600 hover:bg-gray-100"
         }`}
         onClick={() => setViewMode("list")}
@@ -46,7 +46,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
       <button
         className={`p-2 rounded-md ${
           viewMode === "grid"
-            ? "bg-gray-100 text-purple-600"
+            ? "bg-gray-100 text-brand-600"
             : "text-gray-600 hover:bg-gray-100"
         }`}
         onClick={() => setViewMode("grid")}
@@ -56,7 +56,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
       </button>
 
       <button
-        className="p-2 text-gray-600 hover:text-purple-500 rounded-md hover:bg-gray-100"
+        className="p-2 text-gray-600 hover:text-brand-500 rounded-md hover:bg-gray-100"
         onClick={onRefresh}
         title="Refresh"
       >
@@ -67,7 +67,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
         <>
           {onCreateFolder && (
             <button
-              className="p-2 text-gray-600 hover:text-purple-500 rounded-md hover:bg-gray-100"
+              className="p-2 text-gray-600 hover:text-brand-500 rounded-md hover:bg-gray-100"
               onClick={onCreateFolder}
               title="Create folder"
             >
@@ -77,7 +77,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
 
           {onToggleUploader && (
             <button
-              className="p-2 text-gray-600 hover:text-purple-500 rounded-md hover:bg-gray-100"
+              className="p-2 text-gray-600 hover:text-brand-500 rounded-md hover:bg-gray-100"
               onClick={onToggleUploader}
               title="Upload files"
             >
@@ -89,7 +89,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
 
       {onToggleSidebar && (
         <button
-          className="p-2 text-gray-600 hover:text-purple-500 rounded-md hover:bg-gray-100 md:hidden"
+          className="p-2 text-gray-600 hover:text-brand-500 rounded-md hover:bg-gray-100 md:hidden"
           onClick={onToggleSidebar}
           title={showSidebar ? "Hide sidebar" : "Show sidebar"}
         >

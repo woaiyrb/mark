@@ -65,9 +65,9 @@ export const OrbitingActionDock = ({
     //   id: "magic",
     //   icon: SparklesIcon,
     //   label: "Quick actions",
-    //   color: "text-purple-600",
-    //   hoverColor: "hover:text-purple-700",
-    //   bgGradient: "from-purple-400 to-purple-600",
+    //   color: "text-brand-600",
+    //   hoverColor: "hover:text-brand-700",
+    //   bgGradient: "from-brand-400 to-brand-600",
     //   angle: 90, // Bottom
     //   onClick: () => handleAction("magic"),
     // },

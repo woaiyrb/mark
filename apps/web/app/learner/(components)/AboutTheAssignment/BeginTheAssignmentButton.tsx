@@ -10,11 +10,13 @@ interface Props extends React.ComponentPropsWithoutRef<"div"> {
   label: string;
   href: string;
   className?: string;
+  /** "onHero" inverts the button so it stays legible on the gradient band. */
+  tone?: "primary" | "onHero";
   onBegin?: () => void | Promise<void>;
 }
 
 const BeginTheAssignment: React.FC<Props> = (props) => {
-  const { disabled, message, label, href, className, onBegin } = props;
+  const { disabled, message, label, href, className, tone, onBegin } = props;
   const userPreferedLanguage = useLearnerStore(
     (state) => state.userPreferedLanguage,
   );
@@ -36,7 +38,10 @@ const BeginTheAssignment: React.FC<Props> = (props) => {
     <div className={cn(className, "w-full lg:w-auto")}>
       <Tooltip distance={3} content={message}>
         <Button
-          className="group flex items-center justify-center w-full sm:w-auto gap-x-2 disabled:opacity-50 text-center bg-violet-500 text-white px-4 py-2 rounded-md"
+          className={cn(
+            "group flex w-full items-center justify-center gap-x-2 text-center sm:w-auto disabled:translate-y-0 disabled:opacity-50 disabled:shadow-none",
+            tone === "onHero" ? "btn-on-hero" : "btn-primary",
+          )}
           disabled={disabled}
           onClick={MoveToQuestionPage}
         >

@@ -7,62 +7,63 @@
 @layer base {
   :root {
     color-scheme: light;
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
+    /* Light grey canvas (#F7F8FA) + indigo brand (#4F46E5) — the same
+       blue-violet as the sign-in page and teacher dashboard — with a
+       Xiaohongshu coral alert colour (#FF2442). */
+    --background: 220 20% 97%;
+    --foreground: 220 18% 12%;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
+    --card-foreground: 220 18% 12%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --radius: 0.5rem;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    --popover-foreground: 220 18% 12%;
+    --primary: 175 100% 42.5%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 175 40% 96%;
+    --secondary-foreground: 175 60% 25%;
+    --muted: 220 14% 95%;
+    --muted-foreground: 220 8% 46%;
+    --accent: 175 40% 96%;
+    --accent-foreground: 175 60% 25%;
+    --destructive: 352 100% 57%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 14% 92%;
+    --input: 220 14% 88%;
+    --ring: 175 100% 42.5%;
+    --radius: 1rem;
+    --chart-1: 175 100% 42.5%;
+    --chart-2: 160 64% 40%;
+    --chart-3: 38 100% 56%;
+    --chart-4: 352 100% 57%;
+    --chart-5: 199 89% 55%;
   }
 
   .dark {
     color-scheme: dark;
-    /* Dark tokens track the Tailwind gray palette the app's hand-written
-       dark: classes use (gray-900 page, gray-800 cards, gray-700 muted), so
-       shadcn primitives (tabs, inputs, selects) match the rest of the UI. */
-    --background: 221 39% 11%;
-    --foreground: 210 20% 98%;
-    --card: 215 28% 17%;
-    --card-foreground: 0 0% 98%;
-    --popover: 215 28% 17%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 217 19% 27%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 217 19% 27%;
-    --muted-foreground: 218 11% 65%;
-    --accent: 217 19% 27%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 217 19% 27%;
-    --input: 215 14% 34%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    /* Same skin, dimmed: deep indigo canvas, lifted cards, brand glow. */
+    --background: 228 26% 9%;
+    --foreground: 210 24% 96%;
+    --card: 228 22% 14%;
+    --card-foreground: 210 24% 96%;
+    --popover: 228 22% 14%;
+    --popover-foreground: 210 24% 96%;
+    --primary: 231 90% 68%;
+    --primary-foreground: 228 45% 10%;
+    --secondary: 228 18% 20%;
+    --secondary-foreground: 210 24% 96%;
+    --muted: 228 18% 20%;
+    --muted-foreground: 218 14% 68%;
+    --accent: 228 18% 20%;
+    --accent-foreground: 210 24% 96%;
+    --destructive: 349 78% 56%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 228 16% 24%;
+    --input: 228 16% 28%;
+    --ring: 231 90% 70%;
+    --chart-1: 231 90% 68%;
+    --chart-2: 160 72% 48%;
+    --chart-3: 38 92% 60%;
+    --chart-4: 349 92% 68%;
+    --chart-5: 199 89% 60%;
   }
 }
 
@@ -77,7 +78,60 @@
 }
 
 * {
-  font-family: "IBM Plex Sans", sans-serif;
+  font-family:
+    "IBM Plex Sans", "PingFang SC", "HarmonyOS Sans SC", "Hiragino Sans GB",
+    "Microsoft YaHei", system-ui, sans-serif;
+}
+
+/* A whisper of teal at the very top so the grey canvas doesn't read flat. */
+body {
+  background-image: radial-gradient(
+    70rem 24rem at 50% -14rem,
+    rgb(79 70 229 / 0.07),
+    transparent 70%
+  );
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.dark body {
+  background-image:
+    radial-gradient(
+      70rem 26rem at 50% -12rem,
+      rgb(91 118 251 / 0.16),
+      transparent 70%
+    ),
+    radial-gradient(
+      50rem 20rem at 100% 0%,
+      rgb(255 59 92 / 0.08),
+      transparent 65%
+    );
+}
+
+/* Slim, rounded scrollbars — part of the same card language. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(148 163 184 / 0.55) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(148 163 184 / 0.45);
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background-clip: content-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(100 116 139 / 0.7);
 }
 
 /* to overrride the default font size for the md editor */
@@ -131,16 +185,16 @@ ul {
   list-style: disc;
 }
 input:focus {
-  outline: 0px solid #7c3aed !important; /* Outer violet-600 outline */
-  border-color: #7c3aed !important; /* Ensures the inner border is also violet-600 */
-  box-shadow: 0 0 0 0px #e9d5ff !important; /* Inner violet-600 effect */
-  outline-offset: 0; /* Ensure no gap between outline and element */
+  outline: 0px solid #4f46e5 !important; /* brand teal */
+  border-color: #4f46e5 !important;
+  box-shadow: 0 0 0 4px rgb(79 70 229 / 0.16) !important;
+  outline-offset: 0;
 }
 textarea:focus {
-  outline: 0px solid #7c3aed !important; /* Outer violet-600 outline */
-  border-color: #7c3aed !important; /* Ensures the inner border is also violet-600 */
-  box-shadow: none !important; /* Removes any box-shadow effects */
-  outline-offset: 0; /* No gap between outline and textarea */
+  outline: 0px solid #4f46e5 !important; /* brand teal */
+  border-color: #4f46e5 !important;
+  box-shadow: 0 0 0 4px rgb(79 70 229 / 0.16) !important;
+  outline-offset: 0;
 }
 
 .main-author-container {
@@ -149,7 +203,7 @@ textarea:focus {
 
 @layer components {
   .btn {
-    @apply inline-flex text-base items-center justify-center font-medium whitespace-nowrap px-3.5 py-2 border border-solid rounded-md shadow-sm gap-1.5 w-fit focus:ring-offset-2 focus:ring-violet-600 focus:ring-2 focus:outline-none disabled:opacity-50 ring-offset-white dark:ring-offset-gray-800 disabled:cursor-not-allowed cursor-pointer transition-all;
+    @apply inline-flex text-base items-center justify-center font-medium whitespace-nowrap px-4 py-2 border border-solid rounded-pill shadow-sm gap-1.5 w-fit focus:ring-offset-2 focus:ring-violet-600 focus:ring-2 focus:outline-none disabled:opacity-50 ring-offset-white dark:ring-offset-gray-800 disabled:cursor-not-allowed cursor-pointer transition-all duration-200 hover:-translate-y-px active:translate-y-0 disabled:translate-y-0;
   }
 }
 
@@ -158,7 +212,7 @@ textarea:focus {
 }
 
 .btn-primary {
-  @apply btn bg-violet-600 hover:bg-violet-700 text-white;
+  @apply btn text-white border-transparent bg-brand-sheen shadow-soft hover:shadow-lift;
 }
 
 .btn-primary-icon {
@@ -190,11 +244,16 @@ textarea:focus {
 }
 
 .btn-danger {
-  @apply btn text-red-600 border-red-500 bg-white hover:text-white hover:bg-red-600 hover:border-red-600 dark:text-red-400 dark:border-red-500 dark:bg-gray-800 dark:hover:text-white dark:hover:border-red-700 dark:hover:bg-red-700 focus:ring-red-600;
+  @apply btn text-white border-transparent bg-coral-sheen shadow-soft hover:shadow-lift dark:bg-coral-600 dark:hover:bg-coral-500 focus:ring-coral-500;
+}
+
+/* Primary action sitting on the gradient hero: invert instead of blend. */
+.btn-on-hero {
+  @apply btn border-transparent bg-white text-violet-700 shadow-soft hover:bg-white hover:shadow-lift focus:ring-white;
 }
 
 .btn-danger-icon {
-  @apply btn-icon text-red-500 hover:text-white;
+  @apply btn-icon text-white;
 }
 
 .typography-h1 {
@@ -256,7 +315,7 @@ textarea:focus {
 }
 
 .question-container:focus-within {
-  border-color: #7c3aed;
+  border-color: #4360f5;
 }
 
 pre {
@@ -275,9 +334,9 @@ code {
 
 /* Base styling for Quill editor */
 .quill-editor-shell .quill-editor {
-  border: 1px solid #e5e7eb;
-  border-radius: 5px;
-  padding: 10px;
+  border: 1px solid #e8e9ec;
+  border-radius: 12px;
+  padding: 6px;
   background-color: #fff;
   transition: all 0.3s ease-in-out;
   font-family: "IBM Plex Sans", sans-serif !important;
@@ -298,13 +357,46 @@ code {
   padding-left: 8px;
 }
 
-/* Toolbar styling */
+/* Toolbar styling — a light rounded strip, essentials only, teal on hover. */
 .quill-editor-shell .ql-toolbar {
-  border-bottom: 1px solid #e5e7eb;
-  background-color: #f9f9f9;
-  border-radius: 5px 5px 0 0;
-  padding: 5px;
+  border-bottom: 1px solid #f0f1f3;
+  background-color: #fafafb;
+  border-radius: 9px 9px 0 0;
+  padding: 6px 8px;
   transition: background-color 0.3s ease-in-out;
+}
+
+.quill-editor-shell .ql-toolbar .ql-formats {
+  margin-right: 12px;
+}
+
+.quill-editor-shell .ql-toolbar button {
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  border-radius: 8px;
+  transition: all 0.18s ease;
+}
+
+.quill-editor-shell .ql-toolbar button:hover {
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgb(16 24 40 / 0.08);
+}
+
+.quill-editor-shell .ql-toolbar button:hover .ql-stroke {
+  stroke: #4f46e5;
+}
+
+.quill-editor-shell .ql-toolbar button.ql-active {
+  background-color: #eef2ff;
+}
+
+.quill-editor-shell .ql-toolbar button.ql-active .ql-stroke {
+  stroke: #4338ca;
+}
+
+.quill-editor-shell .ql-toolbar button.ql-active .ql-fill {
+  fill: #4338ca;
 }
 
 /* Container styling */
@@ -371,17 +463,17 @@ code {
 }
 .dark .ql-snow.ql-toolbar button:hover .ql-stroke,
 .dark .ql-snow.ql-toolbar button.ql-active .ql-stroke {
-  stroke: #a78bfa;
+  stroke: #a6b6fc;
 }
 .dark .ql-snow.ql-toolbar button:hover .ql-fill,
 .dark .ql-snow.ql-toolbar button.ql-active .ql-fill {
-  fill: #a78bfa;
+  fill: #a6b6fc;
 }
 .dark .ql-snow.ql-toolbar button:hover,
 .dark .ql-snow.ql-toolbar button.ql-active,
 .dark .ql-snow .ql-picker-label:hover,
 .dark .ql-snow .ql-picker-item:hover {
-  color: #a78bfa;
+  color: #a6b6fc;
 }
 .dark .quill-editor-shell .ql-editor code,
 .dark .quill-viewer .ql-editor code,
@@ -430,6 +522,266 @@ code {
 
 .fade-in {
   animation: fadeIn 0.5s ease-in-out;
+}
+
+/* ---------------------------------------------------------------------------
+   Mark UI skin — reusable surfaces.
+   TapTap: floating cards, pill controls, high-energy gradients.
+   Xiaohongshu: warm paper canvas, generous radii, coral accents.
+   --------------------------------------------------------------------------- */
+@layer components {
+  /* Cards ------------------------------------------------------------ */
+  .mark-card {
+    @apply rounded-2xl border border-gray-200/80 bg-white/90 shadow-card backdrop-blur-sm transition-all duration-200 dark:border-gray-700/70 dark:bg-gray-800/80;
+  }
+
+  .mark-card-hover {
+    @apply hover:-translate-y-1 hover:border-violet-300 hover:shadow-lift dark:hover:border-violet-700;
+  }
+
+  .mark-surface {
+    @apply rounded-2xl bg-white/70 backdrop-blur-sm dark:bg-gray-800/60;
+  }
+
+  .mark-panel {
+    @apply rounded-2xl border border-gray-200/70 bg-white p-5 shadow-card dark:border-gray-700/70 dark:bg-gray-800;
+  }
+
+  /* Chips / pills ---------------------------------------------------- */
+  .mark-chip {
+    @apply inline-flex items-center gap-1 rounded-pill px-2.5 py-1 text-xs font-semibold transition-colors;
+  }
+
+  .mark-chip-brand {
+    @apply mark-chip bg-violet-50 text-violet-700 dark:bg-violet-900/40 dark:text-violet-200;
+  }
+
+  .mark-chip-coral {
+    @apply mark-chip bg-coral-50 text-coral-600 dark:bg-coral-900/40 dark:text-coral-200;
+  }
+
+  .mark-chip-mint {
+    @apply mark-chip bg-mint-50 text-mint-700 dark:bg-mint-900/40 dark:text-mint-200;
+  }
+
+  .mark-chip-sunny {
+    @apply mark-chip bg-sunny-50 text-sunny-700 dark:bg-sunny-900/40 dark:text-sunny-200;
+  }
+
+  .mark-chip-neutral {
+    @apply mark-chip bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-200;
+  }
+
+  /* Headings --------------------------------------------------------- */
+  .mark-eyebrow {
+    @apply text-xs font-bold uppercase tracking-[0.14em] text-violet-600 dark:text-violet-300;
+  }
+
+  .mark-title-accent {
+    @apply relative inline-flex items-center gap-2;
+  }
+
+  .mark-title-accent::before {
+    content: "";
+    display: inline-block;
+    @apply h-5 w-1.5 rounded-pill bg-brand-sheen;
+  }
+
+  /* Hero band -------------------------------------------------------- */
+  .mark-hero {
+    @apply relative overflow-hidden rounded-3xl bg-brand-sheen px-6 py-7 text-white shadow-lift;
+  }
+
+  .mark-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      40rem 12rem at 80% -20%,
+      rgba(255, 255, 255, 0.28),
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+
+  /* Layout helpers --------------------------------------------------- */
+  .mark-grid {
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-3;
+  }
+
+  .mark-grid-2 {
+    @apply grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5;
+  }
+
+  .mark-divider {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-gray-200 to-transparent dark:via-gray-700;
+  }
+
+  .mark-glass {
+    @apply border-white/60 bg-white/80 backdrop-blur-xl backdrop-saturate-150 dark:border-gray-700/60 dark:bg-gray-900/80;
+  }
+
+  /* Interactive card: lifts on hover and lights a gradient edge along the
+     top — the "this is tappable" cue a feed card needs. */
+  .mark-card-interactive {
+    @apply mark-card mark-card-hover relative overflow-hidden;
+  }
+
+  .mark-card-interactive::before {
+    content: "";
+    position: absolute;
+    inset-inline: 1.25rem;
+    top: 0;
+    height: 3px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #5b76fb 0%, #7b5bff 55%, #ff3b5c 100%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+  }
+
+  .mark-card-interactive:hover::before {
+    opacity: 1;
+  }
+
+  /* KPI tile: big number on the left, tinted icon well on the right. */
+  .mark-kpi {
+    @apply mark-card mark-card-hover flex items-center justify-between gap-4 p-5;
+  }
+
+  .mark-kpi-icon {
+    @apply grid h-11 w-11 shrink-0 place-items-center rounded-2xl;
+  }
+
+  .mark-kpi-icon-brand {
+    @apply bg-violet-50 text-violet-600 dark:bg-violet-900/40 dark:text-violet-300;
+  }
+
+  .mark-kpi-icon-coral {
+    @apply bg-coral-50 text-coral-600 dark:bg-coral-900/40 dark:text-coral-300;
+  }
+
+  .mark-kpi-icon-mint {
+    @apply bg-mint-50 text-mint-600 dark:bg-mint-900/40 dark:text-mint-300;
+  }
+
+  .mark-kpi-icon-sunny {
+    @apply bg-sunny-50 text-sunny-600 dark:bg-sunny-900/40 dark:text-sunny-300;
+  }
+
+  /* Spec tile: the small "at a glance" stat with an icon. */
+  .mark-spec {
+    @apply rounded-xl px-3 py-2.5 ring-1 transition-all duration-200 hover:-translate-y-0.5;
+  }
+
+  /* Entrance stagger — pure CSS, no observer, so it can't fight hydration. */
+  .mark-entrance {
+    @apply animate-fade-up;
+  }
+
+  .mark-entrance-1 {
+    animation-delay: 60ms;
+  }
+
+  .mark-entrance-2 {
+    animation-delay: 120ms;
+  }
+
+  .mark-entrance-3 {
+    animation-delay: 180ms;
+  }
+
+  .mark-entrance-4 {
+    animation-delay: 240ms;
+  }
+
+  .mark-entrance-5 {
+    animation-delay: 300ms;
+  }
+
+  /* Gradient headline — used for the loudest text on a page. */
+  .mark-sheen-text {
+    @apply bg-gradient-to-r from-violet-600 via-brand-500 to-coral-500 bg-clip-text text-transparent;
+  }
+
+  /* Hero band, wide variant: title + meta + primary action in one surface. */
+  .mark-hero-lg {
+    @apply relative overflow-hidden rounded-3xl bg-brand-sheen px-5 py-6 text-white shadow-lift sm:px-8 sm:py-7;
+  }
+
+  .mark-hero-lg::before {
+    content: "";
+    position: absolute;
+    inset-block: -60%;
+    right: -10%;
+    width: 30rem;
+    background: radial-gradient(
+      circle at center,
+      rgba(255, 255, 255, 0.22),
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+
+  .mark-hero-lg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 28px 28px;
+    mask-image: linear-gradient(to bottom, black, transparent 85%);
+    pointer-events: none;
+  }
+
+  /* Loading placeholder for the insights dashboard. */
+  .mark-skeleton {
+    @apply animate-pulse rounded-xl bg-gray-200/70 dark:bg-gray-700/60;
+  }
+}
+
+/* One easing curve for the whole skin: quick out, soft settle. */
+@layer base {
+  :where(
+    a,
+    button,
+    [role="button"],
+    .btn,
+    .mark-card,
+    .mark-card-interactive,
+    .mark-kpi
+  ) {
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Keyboard focus reads as a brand halo wherever it lands. */
+  :where(
+    a,
+    button,
+    [role="button"],
+    input,
+    select,
+    textarea,
+    summary,
+    [tabindex]
+  ):focus-visible {
+    outline: 2px solid rgb(67 96 245 / 0.75);
+    outline-offset: 2px;
+  }
+}
+
+/* Table rows get the same hover language as the cards. */
+tbody tr {
+  transition: background-color 0.15s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+tbody tr:hover {
+  background-color: rgb(91 118 251 / 0.05);
+}
+
+.dark tbody tr:hover {
+  background-color: rgb(148 163 184 / 0.1);
 }
 
 /* Syntax highlighting styling */

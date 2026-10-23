@@ -2,7 +2,17 @@ import languages from "@/public/languages.json";
 
 export const UI_LANGUAGE_STORAGE_KEY = "ui-language";
 export const UI_LANGUAGE_CHANGED_EVENT = "ui-language-changed";
+
+/// The language the UI copy is authored in. Translation catalogs are keyed by
+/// this language's source text, and the translator short-circuits on it
+/// (source text needs no lookup). Changing this breaks every catalog, so it
+/// must stay "en" — use INITIAL_UI_LANGUAGE to change what users see first.
 export const DEFAULT_UI_LANGUAGE = "en";
+
+/// The language shown on a first visit, when the user has not picked one yet
+/// (no ?uiLang and nothing in localStorage). Set to Chinese for the
+/// math-homework deployment; switch it back to "en" for upstream behaviour.
+export const INITIAL_UI_LANGUAGE = "zh-CN";
 
 const supportedLanguageCodes = new Set(languages.map((lang) => lang.code));
 
@@ -16,6 +26,13 @@ export function getStoredUiLanguage(): string | null {
   if (typeof window === "undefined") return null;
 
   const storedLanguage = window.localStorage.getItem(UI_LANGUAGE_STORAGE_KEY);
+
+  // Chinese-only deployment: the language switcher is gone, so a value left
+  // behind by an earlier build (or a hand-edited localStorage) is the only
+  // thing that could still turn the UI back to English. Ignore anything that
+  // is not the initial language.
+  if (storedLanguage !== INITIAL_UI_LANGUAGE) return null;
+
   return isSupportedUiLanguage(storedLanguage) ? storedLanguage : null;
 }
 

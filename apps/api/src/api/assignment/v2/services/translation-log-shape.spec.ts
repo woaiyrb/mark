@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { execSync } from "node:child_process";
+import { execFileSync } from "node:child_process";
 import { Writable } from "node:stream";
 import { resolve } from "node:path";
 import * as winston from "winston";
@@ -40,6 +40,24 @@ import type { TranslationOutcome } from "./translation.service";
  */
 describe("Log shape contract: translation-job lifecycle", () => {
   const repoRoot = resolve(__dirname, "..", "..", "..", "..", "..", "..", "..");
+
+  // Cross-platform `git grep`: run git directly with an argv array instead of a
+  // shell string. Windows cmd.exe has no /dev/null (so `2>/dev/null || true`
+  // fails) and does not treat single quotes as quoting (so shell-quoted
+  // patterns are passed through with the quotes attached).
+  function gitGrep(args: string[]): string {
+    try {
+      return execFileSync(
+        "git",
+        ["-C", repoRoot, "grep", "--no-color", ...args],
+        { encoding: "utf8" },
+      );
+    } catch (error) {
+      // git grep exits 1 when nothing matched, which is a valid empty result.
+      if ((error as { status?: number }).status === 1) return "";
+      throw error;
+    }
+  }
 
   function parseJsonLines(buffer: string): Array<Record<string, any>> {
     return buffer
@@ -216,8 +234,13 @@ describe("Log shape contract: translation-job lifecycle", () => {
     function workerCompleteEmit(): string {
       // Returns the source slice that contains the publish.translation.job.complete
       // emit, including the surrounding object literal so we can grep field names.
-      const cmd = `git -C ${repoRoot} grep --no-color -A 12 'publish.translation.job.complete' -- 'apps/jobs/src/job-worker.service.ts' 2>/dev/null || true`;
-      return execSync(cmd, { encoding: "utf8" });
+      return gitGrep([
+        "-A",
+        "12",
+        "publish.translation.job.complete",
+        "--",
+        "apps/jobs/src/job-worker.service.ts",
+      ]);
     }
 
     it("emits at least one publish.translation.job.complete line in the worker source", () => {
@@ -249,15 +272,25 @@ describe("Log shape contract: translation-job lifecycle", () => {
     const workerFile = `${repoRoot}/apps/jobs/src/job-worker.service.ts`;
 
     it("source emits publish.translation.job.start with languageCount: 23", () => {
-      const cmd = `git -C ${repoRoot} grep --no-color -A 10 'publish.translation.job.start' -- 'apps/jobs/src/job-worker.service.ts' 2>/dev/null || true`;
-      const slice = execSync(cmd, { encoding: "utf8" });
+      const slice = gitGrep([
+        "-A",
+        "10",
+        "publish.translation.job.start",
+        "--",
+        "apps/jobs/src/job-worker.service.ts",
+      ]);
       expect(slice).toMatch(/publish\.translation\.job\.start/);
       expect(slice).toMatch(/languageCount:\s*23/);
     });
 
     it("source emits publish.translation.job.failed with error: <string>, no stack", () => {
-      const cmd = `git -C ${repoRoot} grep --no-color -A 10 'publish.translation.job.failed' -- 'apps/jobs/src/job-worker.service.ts' 2>/dev/null || true`;
-      const slice = execSync(cmd, { encoding: "utf8" });
+      const slice = gitGrep([
+        "-A",
+        "10",
+        "publish.translation.job.failed",
+        "--",
+        "apps/jobs/src/job-worker.service.ts",
+      ]);
       expect(slice).toMatch(/publish\.translation\.job\.failed/);
       // Stack must never be in the failed line's payload.
       expect(slice).not.toHaveProperty("stack");
@@ -270,8 +303,13 @@ describe("Log shape contract: translation-job lifecycle", () => {
     // because driving runPublishJob requires bootstrapping the full
     // publish flow (Prisma + Redis + Bull + version management).
     it("source emits publish.complete with percentage: 100", () => {
-      const cmd = `git -C ${repoRoot} grep --no-color -A 10 'publish\\.complete' -- 'apps/api/src/api/assignment/v2/services/assignment.service.ts' 2>/dev/null || true`;
-      const slice = execSync(cmd, { encoding: "utf8" });
+      const slice = gitGrep([
+        "-A",
+        "10",
+        "publish\\.complete",
+        "--",
+        "apps/api/src/api/assignment/v2/services/assignment.service.ts",
+      ]);
       expect(slice).toMatch(/publish\.complete/);
       expect(slice).toMatch(/percentage:\s*100/);
     });

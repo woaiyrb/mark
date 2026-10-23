@@ -68,7 +68,7 @@ export const getFileIcon = (file: FileObject, size = 20) => {
     case "docx":
     case "txt":
     case "md":
-      return <IconFileText size={size} className="text-purple-500" />;
+      return <IconFileText size={size} className="text-brand-500" />;
     case "xls":
     case "xlsx":
     case "csv":
@@ -77,7 +77,7 @@ export const getFileIcon = (file: FileObject, size = 20) => {
     case "rar":
     case "tar":
     case "gz":
-      return <IconFileZip size={size} className="text-purple-500" />;
+      return <IconFileZip size={size} className="text-brand-500" />;
     case "mp3":
     case "wav":
     case "ogg":
@@ -98,11 +98,11 @@ export const getFileIcon = (file: FileObject, size = 20) => {
       return <IconBrandJavascript size={size} className="text-yellow-500" />;
     case "ts":
     case "tsx":
-      return <IconFileCode size={size} className="text-purple-500" />;
+      return <IconFileCode size={size} className="text-brand-500" />;
     case "html":
       return <IconBrandHtml5 size={size} className="text-orange-500" />;
     case "css":
-      return <IconBrandCss3 size={size} className="text-purple-500" />;
+      return <IconBrandCss3 size={size} className="text-brand-500" />;
     case "py":
       return <IconBrandPython size={size} className="text-green-500" />;
     case "ppt":
@@ -993,7 +993,7 @@ const FileExplorer: React.FC<FileExplorerProps> = ({
                             {recentFolders.slice(1).map((path) => (
                               <li key={path}>
                                 <button
-                                  className="text-sm text-purple-600 hover:underline truncate w-full text-left"
+                                  className="text-sm text-brand-600 hover:underline truncate w-full text-left"
                                   onClick={() => {
                                     navigateToFolder(path);
                                     setDrawerOpen(false);
@@ -1062,7 +1062,7 @@ const FileExplorer: React.FC<FileExplorerProps> = ({
                         {recentFolders.slice(1).map((path) => (
                           <li key={path}>
                             <button
-                              className="text-xs text-purple-600 hover:underline truncate w-full text-left"
+                              className="text-xs text-brand-600 hover:underline truncate w-full text-left"
                               onClick={() => navigateToFolder(path)}
                             >
                               {path === "/" ? "Root" : path.split("/").pop()}
@@ -1079,7 +1079,7 @@ const FileExplorer: React.FC<FileExplorerProps> = ({
             <div className="explorer-main flex-1 p-3 md:p-4 overflow-y-auto">
               {isLoading ? (
                 <div className="flex items-center justify-center h-full">
-                  <IconLoader2 className="animate-spin text-purple-500 mr-2" />
+                  <IconLoader2 className="animate-spin text-brand-500 mr-2" />
                   <span>Loading files...</span>
                 </div>
               ) : error ? (
@@ -1179,13 +1179,13 @@ const FileExplorer: React.FC<FileExplorerProps> = ({
           </div>
 
           {showConfirmationBar && (
-            <div className="border-t border-gray-300 bg-purple-50 shadow-sm">
+            <div className="border-t border-gray-300 bg-brand-50 shadow-sm">
               <div className="p-4 flex flex-wrap items-center justify-between gap-3">
                 <div className="flex items-center">
-                  <span className="font-medium text-purple-700 mr-2">
+                  <span className="font-medium text-brand-700 mr-2">
                     {pendingSelection.length} file(s) selected
                   </span>
-                  <span className="text-sm text-purple-600">
+                  <span className="text-sm text-brand-600">
                     Click 'Confirm Selection' to proceed with these files
                   </span>
                 </div>
@@ -1197,7 +1197,7 @@ const FileExplorer: React.FC<FileExplorerProps> = ({
                     Cancel Selection
                   </button>
                   <button
-                    className="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
+                    className="px-4 py-2 bg-brand-600 text-white rounded hover:bg-brand-700"
                     onClick={handleConfirmSelection}
                   >
                     Confirm Selection
@@ -1270,7 +1270,7 @@ const FileExplorer: React.FC<FileExplorerProps> = ({
                   value={newFolderName}
                   onChange={(e) => setNewFolderName(e.target.value)}
                   placeholder="Enter folder name"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-brand-500 focus:border-brand-500"
                   autoFocus
                 />
               </div>
@@ -1285,7 +1285,7 @@ const FileExplorer: React.FC<FileExplorerProps> = ({
                 <button
                   type="button"
                   onClick={submitCreateFolder}
-                  className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700"
+                  className="px-4 py-2 bg-brand-600 text-white rounded-md hover:bg-brand-700"
                 >
                   Create Folder
                 </button>

@@ -97,9 +97,7 @@ const FileList: React.FC<FileListProps> = ({
                   ? "p-3 border border-gray-200 rounded-md hover:bg-gray-50 hover:border-gray-300 transition-colors"
                   : "p-3 hover:bg-gray-50 transition-colors"
               } cursor-pointer ${
-                dropTarget === folder.path
-                  ? "bg-purple-50 border-purple-300"
-                  : ""
+                dropTarget === folder.path ? "bg-brand-50 border-brand-300" : ""
               }`}
               onClick={() => onFolderSelect(folder.path)}
               onDragOver={
@@ -137,7 +135,7 @@ const FileList: React.FC<FileListProps> = ({
               key={file.id}
               className={`file-card border rounded-md p-3 ${
                 isSelected
-                  ? "bg-purple-50 border-purple-300 ring-2 ring-purple-300 ring-opacity-50"
+                  ? "bg-brand-50 border-brand-300 ring-2 ring-brand-300 ring-opacity-50"
                   : "border-gray-200"
               } hover:shadow-sm transition-all duration-200 relative`}
               onClick={() => onFileSelect(file)}
@@ -146,7 +144,7 @@ const FileList: React.FC<FileListProps> = ({
               onDragEnd={onDragEnd}
             >
               {isSelected && (
-                <div className="absolute top-2 right-2 w-5 h-5 bg-purple-500 rounded-full flex items-center justify-center">
+                <div className="absolute top-2 right-2 w-5 h-5 bg-brand-500 rounded-full flex items-center justify-center">
                   <IconCheck size={14} className="text-white" />
                 </div>
               )}
@@ -177,7 +175,7 @@ const FileList: React.FC<FileListProps> = ({
 
                 <div className="flex space-x-1">
                   <button
-                    className="p-1 text-gray-400 hover:text-purple-600 rounded-full hover:bg-gray-100"
+                    className="p-1 text-gray-400 hover:text-brand-600 rounded-full hover:bg-gray-100"
                     onClick={(e) => {
                       e.stopPropagation();
                       onPreview(file);
@@ -316,7 +314,7 @@ const FileList: React.FC<FileListProps> = ({
                 <tr
                   key={file.id}
                   className={`hover:bg-gray-50 ${
-                    isSelected ? "bg-purple-50" : ""
+                    isSelected ? "bg-brand-50" : ""
                   }`}
                   onClick={() => onFileSelect(file)}
                   draggable={!readOnly && !!onDragStart}
@@ -360,7 +358,7 @@ const FileList: React.FC<FileListProps> = ({
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <div className="flex justify-end space-x-2">
                       <button
-                        className="text-purple-600 hover:text-purple-900"
+                        className="text-brand-600 hover:text-brand-900"
                         onClick={(e) => {
                           e.stopPropagation();
                           onPreview(file);

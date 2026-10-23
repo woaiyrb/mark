@@ -30,7 +30,7 @@ export function SectionWithTitle<T extends ElementType = "section">(
   const Component = as ?? "section";
   return (
     <Component
-      className="group relative flex flex-col items-start gap-y-4 px-8 py-6 max-w-full bg-white dark:bg-gray-800 rounded border border-solid border-gray-400 dark:border-gray-600 max-md:px-5"
+      className="group relative flex max-w-full flex-col items-start gap-y-5 rounded-2xl border border-gray-200/70 bg-white px-5 py-5 shadow-card transition-shadow duration-200 hover:shadow-soft max-md:px-5 sm:px-7 sm:py-7 dark:border-gray-700/70 dark:bg-gray-800"
       {...rest}
     >
       <div className="flex flex-col gap-y-1.5">
@@ -39,15 +39,15 @@ export function SectionWithTitle<T extends ElementType = "section">(
             "flex items-center gap-2 max-md:flex-wrap",
             compact
               ? "text-base font-semibold text-gray-700 dark:text-gray-200"
-              : "text-2xl font-bold text-black",
+              : "text-xl font-bold tracking-[-0.01em] text-gray-900 dark:text-gray-100",
           )}
         >
           {IconForTitle && (
-            <IconForTitle className="shrink-0 my-auto w-6 aspect-square text-gray-500 dark:text-gray-400" />
+            <IconForTitle className="shrink-0 my-auto w-5 aspect-square text-brand-500 dark:text-brand-400" />
           )}
           <span className={cn(IconForTitle && "pl-1.5")}>{title}</span>
           {required && (
-            <span className="text-xs font-medium text-violet-700 dark:text-violet-300 bg-violet-50 dark:bg-violet-900/20 border border-violet-200 dark:border-violet-800 px-1.5 py-0.5 rounded">
+            <span className="rounded-pill border border-violet-200 bg-violet-50 px-2.5 py-0.5 text-xs font-semibold text-violet-700 dark:border-violet-800 dark:bg-violet-900/20 dark:text-violet-300">
               Required
             </span>
           )}

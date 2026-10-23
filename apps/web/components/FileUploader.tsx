@@ -325,7 +325,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({
           whileHover={{ scale: isUploading ? 1 : 1.02 }}
           className={`flex flex-col items-center justify-center border-2 border-dashed p-6 rounded-md transition-colors ${
             isDragActive
-              ? "border-purple-500 bg-purple-50 dark:bg-purple-900/30"
+              ? "border-brand-500 bg-brand-50 dark:bg-brand-900/30"
               : "border-gray-300 dark:border-gray-600"
           }`}
         >
@@ -335,7 +335,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({
             className="text-gray-500 dark:text-gray-400 mb-4"
           />
           {isDragActive ? (
-            <p className="text-purple-500">Drop the files here...</p>
+            <p className="text-brand-500">Drop the files here...</p>
           ) : isUploading ? (
             <p className="text-gray-500 dark:text-gray-400">
               Upload in progress...
@@ -383,14 +383,14 @@ const FileUploader: React.FC<FileUploaderProps> = ({
                           ? "bg-red-100 dark:bg-red-900/30"
                           : status.status === "waiting"
                             ? "bg-amber-100 dark:bg-amber-900/30"
-                            : "bg-purple-100 dark:bg-purple-900/30"
+                            : "bg-brand-100 dark:bg-brand-900/30"
                       }
                     `}
                     >
                       {status.status === "uploading" ? (
                         <IconLoader2
                           size={20}
-                          className="text-purple-600 animate-spin"
+                          className="text-brand-600 animate-spin"
                         />
                       ) : status.status === "waiting" ? (
                         <IconLoader2
@@ -426,7 +426,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({
                       status.status === "error"
                         ? "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-200"
                         : status.status === "uploading"
-                          ? "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-200"
+                          ? "bg-brand-100 text-brand-700 dark:bg-brand-900/30 dark:text-brand-200"
                           : status.status === "waiting"
                             ? "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-200"
                             : "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-200"
@@ -447,7 +447,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({
                           ? "bg-green-500"
                           : status.status === "waiting"
                             ? "bg-amber-400"
-                            : "bg-gradient-to-r from-purple-500 to-purple-600"
+                            : "bg-gradient-to-r from-brand-500 to-brand-600"
                     }`}
                     initial={{ width: "0%" }}
                     animate={{
@@ -502,7 +502,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({
             </h3>
             <button
               onClick={() => setShowUploaded(!showUploaded)}
-              className="text-purple-500 text-sm hover:text-purple-700"
+              className="text-brand-500 text-sm hover:text-brand-700"
             >
               {showUploaded ? "Hide" : "Show"} ({existingFiles.length})
             </button>
@@ -539,7 +539,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({
                       {deleteStatus[file.key] === "deleting" ? (
                         <IconLoader2
                           size={20}
-                          className="text-purple-500 animate-spin"
+                          className="text-brand-500 animate-spin"
                         />
                       ) : (
                         <button

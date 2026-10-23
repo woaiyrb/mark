@@ -450,7 +450,7 @@ function AdminDashboardContent({
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-0">
-                <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent leading-none">
+                <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-brand-600 bg-clip-text text-transparent leading-none">
                   {stats.totalAssignments.toLocaleString()}
                 </div>
                 <p className="text-xs text-muted-foreground mt-2">
@@ -484,7 +484,7 @@ function AdminDashboardContent({
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-0">
-                <div className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent leading-none">
+                <div className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-brand-600 bg-clip-text text-transparent leading-none">
                   {stats.totalLearners.toLocaleString()}
                 </div>
                 <p className="text-xs text-muted-foreground mt-2">

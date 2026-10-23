@@ -18,7 +18,7 @@ const SpeechBubble = ({ bubble, onDismiss, position }: SpeechBubbleProps) => {
       case "dizzy":
         return "bg-yellow-100 border-yellow-300 text-yellow-800";
       case "excited":
-        return "bg-purple-100 border-purple-300 text-purple-800";
+        return "bg-brand-100 border-brand-300 text-brand-800";
       case "warning":
         return "bg-red-100 border-red-300 text-red-800";
       case "funny":

@@ -99,7 +99,7 @@ const FileCard: React.FC<FileCardProps> = ({
         <div
           className={`file-card border rounded-md p-3 transition-all duration-200 ${
             isSelected
-              ? "bg-purple-50 border-purple-300 ring-2 ring-purple-300 ring-opacity-50"
+              ? "bg-brand-50 border-brand-300 ring-2 ring-brand-300 ring-opacity-50"
               : isHovered
                 ? "border-gray-300 shadow-sm bg-gray-50"
                 : "border-gray-200 hover:border-gray-300 hover:shadow-sm"
@@ -113,7 +113,7 @@ const FileCard: React.FC<FileCardProps> = ({
           onDragEnd={onDragEnd}
         >
           {isSelected && (
-            <div className="absolute top-2 right-2 w-5 h-5 bg-purple-500 rounded-full flex items-center justify-center">
+            <div className="absolute top-2 right-2 w-5 h-5 bg-brand-500 rounded-full flex items-center justify-center">
               <IconCheck size={14} className="text-white" />
             </div>
           )}
@@ -170,7 +170,7 @@ const FileCard: React.FC<FileCardProps> = ({
       <div
         className={`file-list-item flex items-center p-2 rounded-md ${
           isSelected
-            ? "bg-purple-50"
+            ? "bg-brand-50"
             : isHovered
               ? "bg-gray-50"
               : "hover:bg-gray-50"
@@ -187,7 +187,7 @@ const FileCard: React.FC<FileCardProps> = ({
           <div
             className={`w-5 h-5 rounded border ${
               isSelected
-                ? "bg-purple-500 border-purple-500 flex items-center justify-center"
+                ? "bg-brand-500 border-brand-500 flex items-center justify-center"
                 : "border-gray-300"
             }`}
           >
@@ -215,7 +215,7 @@ const FileCard: React.FC<FileCardProps> = ({
           <div className="actions flex items-center space-x-1">
             {onShowInfo && (
               <button
-                className="p-1 text-gray-400 hover:text-purple-600 rounded-full hover:bg-gray-100"
+                className="p-1 text-gray-400 hover:text-brand-600 rounded-full hover:bg-gray-100"
                 onClick={(e) => {
                   e.stopPropagation();
                   onShowInfo(file);

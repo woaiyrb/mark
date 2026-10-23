@@ -177,7 +177,7 @@ export default function GradingProgressModal({
         return "bg-amber-500";
       case "processing":
       case "stalled":
-        return "bg-purple-500";
+        return "bg-brand-500";
       default:
         return "bg-gray-400";
     }
@@ -278,7 +278,7 @@ export default function GradingProgressModal({
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.8, opacity: 0, y: 50 }}
               transition={{ type: "spring", damping: 30, stiffness: 300 }}
-              className="relative bg-gradient-to-br from-white via-white to-purple-50/50 dark:from-gray-800 dark:via-gray-800 dark:to-purple-900/30 rounded-3xl shadow-2xl p-8 max-w-md w-full backdrop-blur-xl border border-white/20 dark:border-gray-700/50"
+              className="relative bg-gradient-to-br from-white via-white to-brand-50/50 dark:from-gray-800 dark:via-gray-800 dark:to-brand-900/30 rounded-3xl shadow-2xl p-8 max-w-md w-full backdrop-blur-xl border border-white/20 dark:border-gray-700/50"
               style={{
                 boxShadow:
                   "0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1)",
@@ -440,7 +440,7 @@ export default function GradingProgressModal({
                         <button
                           type="button"
                           onClick={onCheckResults}
-                          className="inline-flex items-center justify-center rounded-lg bg-purple-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+                          className="inline-flex items-center justify-center rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
                         >
                           Check my results
                         </button>
@@ -480,7 +480,7 @@ export default function GradingProgressModal({
                     >
                       <div className="relative bg-gray-100 dark:bg-gray-700 rounded-full h-3 overflow-hidden shadow-inner">
                         <motion.div
-                          className="h-full rounded-full bg-gradient-to-r from-purple-500 via-blue-500 to-purple-500 relative shadow-lg"
+                          className="h-full rounded-full bg-gradient-to-r from-brand-500 via-blue-500 to-brand-500 relative shadow-lg"
                           style={{
                             width: barWidth,
                             backgroundSize: "200% 100%",
@@ -691,9 +691,9 @@ const ROW_STYLES: Record<
   },
   in_progress: {
     container:
-      "bg-purple-50 text-purple-900 dark:bg-purple-900/30 dark:text-purple-200",
-    icon: "text-purple-500 animate-pulse",
-    label: "text-purple-600 dark:text-purple-300",
+      "bg-brand-50 text-brand-900 dark:bg-brand-900/30 dark:text-brand-200",
+    icon: "text-brand-500 animate-pulse",
+    label: "text-brand-600 dark:text-brand-300",
     glyph: "◐",
     text: "Grading",
   },

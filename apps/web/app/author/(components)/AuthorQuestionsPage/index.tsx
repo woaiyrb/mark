@@ -42,17 +42,8 @@ import {
   ListBulletIcon,
   PencilIcon,
 } from "@heroicons/react/20/solid";
-import {
-  ArrowUpTrayIcon,
-  DocumentArrowUpIcon,
-  DocumentArrowDownIcon,
-} from "@heroicons/react/24/outline";
-import {
-  Bars3BottomLeftIcon,
-  LinkIcon,
-  SparklesIcon,
-  TrashIcon,
-} from "@heroicons/react/24/solid";
+import { DocumentArrowDownIcon } from "@heroicons/react/24/outline";
+import { SparklesIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { IconCheckbox, IconCircleCheck } from "@tabler/icons-react";
 import React, {
   Fragment,
@@ -135,26 +126,6 @@ const AuthorQuestionsPage: FC<Props> = ({
         value: "TRUE_FALSE",
         label: "True/False",
         icon: <IconCircleCheck className="w-5 h-5" />,
-      },
-      {
-        value: "TEXT",
-        label: "Text Response",
-        icon: <Bars3BottomLeftIcon className="w-5 h-5 stroke-gray-500" />,
-      },
-      {
-        value: "URL",
-        label: "URL Link",
-        icon: <LinkIcon className="w-5 h-5  stroke-gray-500" />,
-      },
-      {
-        value: "UPLOAD",
-        label: "File Upload",
-        icon: <DocumentArrowUpIcon className="w-5 h-5 stroke-gray-500" />,
-      },
-      {
-        value: "LINK_FILE",
-        label: "File or Link",
-        icon: <ArrowUpTrayIcon className="w-5 h-5 stroke-gray-500" />,
       },
     ],
 

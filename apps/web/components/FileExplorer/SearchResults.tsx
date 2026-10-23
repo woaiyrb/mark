@@ -83,7 +83,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
                 <tr
                   key={file.id}
                   className={`hover:bg-gray-50 ${
-                    isSelected ? "bg-purple-50" : ""
+                    isSelected ? "bg-brand-50" : ""
                   }`}
                   onClick={() => onFileSelect(file)}
                 >
@@ -100,7 +100,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     <span
-                      className="cursor-pointer hover:text-purple-600"
+                      className="cursor-pointer hover:text-brand-600"
                       onClick={(e) => {
                         e.stopPropagation();
                         onNavigateToFolder(file.path || "/");
@@ -116,7 +116,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <div className="flex justify-end space-x-2">
                       <button
-                        className="text-purple-600 hover:text-purple-900"
+                        className="text-brand-600 hover:text-brand-900"
                         onClick={(e) => {
                           e.stopPropagation();
                           onPreview(file);

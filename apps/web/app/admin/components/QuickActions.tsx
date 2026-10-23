@@ -113,7 +113,7 @@ const quickActions = [
     icon: Activity,
     category: "Activity",
     hover:
-      "hover:bg-purple-100 hover:text-purple-800 hover:border-purple-200 dark:hover:bg-purple-900/30 dark:hover:text-purple-200 dark:hover:border-purple-800",
+      "hover:bg-brand-100 hover:text-brand-800 hover:border-brand-200 dark:hover:bg-brand-900/30 dark:hover:text-brand-200 dark:hover:border-brand-800",
   },
   {
     id: "cost-per-learner-analysis",

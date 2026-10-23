@@ -114,7 +114,7 @@ const ExportModal: React.FC<ExportModalProps> = ({
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
           <div className="flex items-center gap-3">
-            <DocumentArrowDownIcon className="w-6 h-6 text-purple-600 dark:text-purple-300" />
+            <DocumentArrowDownIcon className="w-6 h-6 text-brand-600 dark:text-brand-300" />
             <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
               Export Assignment
             </h2>
@@ -156,7 +156,7 @@ const ExportModal: React.FC<ExportModalProps> = ({
                   className={cn(
                     "p-4 border rounded-lg text-left transition-all",
                     format === formatOption.value
-                      ? "border-purple-500 bg-purple-50 dark:bg-purple-900/20 text-purple-900 dark:text-purple-200"
+                      ? "border-brand-500 bg-brand-50 dark:bg-brand-900/20 text-brand-900 dark:text-brand-200"
                       : "border-gray-200 dark:border-gray-700 hover:border-gray-300",
                   )}
                 >
@@ -184,8 +184,8 @@ const ExportModal: React.FC<ExportModalProps> = ({
                     className={cn(
                       "w-5 h-5 border-2 rounded flex items-center justify-center mt-0.5 transition-colors",
                       exportOptions[option.id]
-                        ? "border-purple-500 bg-purple-500"
-                        : "border-gray-300 dark:border-gray-600 hover:border-purple-400",
+                        ? "border-brand-500 bg-brand-500"
+                        : "border-gray-300 dark:border-gray-600 hover:border-brand-400",
                     )}
                   >
                     {exportOptions[option.id] && (
@@ -274,7 +274,7 @@ const ExportModal: React.FC<ExportModalProps> = ({
           </button>
           <button
             onClick={handleExport}
-            className="px-4 py-2 text-sm font-medium text-white bg-purple-600 border border-transparent rounded-md hover:bg-purple-700 transition-colors flex items-center gap-2"
+            className="px-4 py-2 text-sm font-medium text-white bg-brand-600 border border-transparent rounded-md hover:bg-brand-700 transition-colors flex items-center gap-2"
           >
             <DocumentArrowDownIcon className="w-4 h-4" />
             Export Assignment

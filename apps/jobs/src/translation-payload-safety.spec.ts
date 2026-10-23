@@ -1,4 +1,4 @@
-import { execSync } from "node:child_process";
+import { execFileSync } from "node:child_process";
 import { resolve } from "node:path";
 
 /**
@@ -23,9 +23,32 @@ describe("Telemetry payload safety: translation jobs do not log content", () => 
     "apps/jobs/src/job-worker.service.ts",
     "apps/api/src/job-queue/",
     "apps/api/src/api/assignment/v2/services/translation.service.ts",
-  ].join(" ");
+  ];
+  const excludedSpecs = [
+    ":!apps/jobs/src/translation-payload-safety.spec.ts",
+    ":!apps/api/src/api/assignment/v2/services/translation-log-shape.spec.ts",
+    ":!apps/api/src/api/assignment/v2/services/translation-payload-safety.runtime.spec.ts",
+  ];
   const forbidden =
     "translatedText|translatedChoices|question\\.question|error\\.stack";
+
+  // Cross-platform `git grep`: run git directly with an argv array instead of a
+  // shell string. Windows cmd.exe has no /dev/null (so `2>/dev/null || true`
+  // fails) and does not treat single quotes as quoting (so shell-quoted
+  // patterns are passed through with the quotes attached).
+  function gitGrepOutput(args: string[]): string {
+    try {
+      return execFileSync(
+        "git",
+        ["-C", repoRoot, "grep", "--no-color", ...args],
+        { encoding: "utf8" },
+      ).trim();
+    } catch (error) {
+      // git grep exits 1 when nothing matched — the success case here.
+      if ((error as { status?: number }).status === 1) return "";
+      throw error;
+    }
+  }
 
   it("no logger.{info,warn,error,log} call site in the translation-job surface references forbidden content tokens", () => {
     // git grep returns lines matching: a logger call where one of the
@@ -33,17 +56,15 @@ describe("Telemetry payload safety: translation jobs do not log content", () => 
     // intentionally — a multi-line logger.error({ ... }) block with the
     // forbidden token on its own line is still caught because the field
     // name appears on its own line in formatted source.
-    // The exit-code-2 fallback `|| true` keeps execSync from throwing when
-    // grep finds no matches (the success case for this regression test).
-    const cmd =
-      `git -C ${repoRoot} grep --no-color -nE ` +
-      `'logger\\.(info|warn|error|log).*(${forbidden})' ` +
-      `-- ${scope} ` +
-      `':!apps/jobs/src/translation-payload-safety.spec.ts' ` +
-      `':!apps/api/src/api/assignment/v2/services/translation-log-shape.spec.ts' ` +
-      `':!apps/api/src/api/assignment/v2/services/translation-payload-safety.runtime.spec.ts' ` +
-      `2>/dev/null || true`;
-    const output = execSync(cmd, { encoding: "utf8" }).trim();
+    // gitGrepOutput returns "" when git grep finds no matches, which is the
+    // success case for this regression test.
+    const output = gitGrepOutput([
+      "-nE",
+      `logger\\.(info|warn|error|log).*(${forbidden})`,
+      "--",
+      ...scope,
+      ...excludedSpecs,
+    ]);
     if (output !== "") {
       throw new Error(
         "Forbidden content token found inside a logger.* call in the translation-job surface:\n" +
@@ -62,15 +83,13 @@ describe("Telemetry payload safety: translation jobs do not log content", () => 
     // the raw Error and the Winston transport serializes it (including
     // .stack) into the JSON payload. Use error.message only at info / warn /
     // error transports; full stacks belong on a separate debug transport.
-    const cmd =
-      `git -C ${repoRoot} grep --no-color -nE ` +
-      `'logger\\.(error|warn)\\(.*,\\s*error[\\s),]' ` +
-      `-- ${scope} ` +
-      `':!apps/jobs/src/translation-payload-safety.spec.ts' ` +
-      `':!apps/api/src/api/assignment/v2/services/translation-log-shape.spec.ts' ` +
-      `':!apps/api/src/api/assignment/v2/services/translation-payload-safety.runtime.spec.ts' ` +
-      `2>/dev/null || true`;
-    const output = execSync(cmd, { encoding: "utf8" }).trim();
+    const output = gitGrepOutput([
+      "-nE",
+      `logger\\.(error|warn)\\(.*,\\s*error[\\s),]`,
+      "--",
+      ...scope,
+      ...excludedSpecs,
+    ]);
     if (output !== "") {
       throw new Error(
         "logger.* call passing the raw error object found in the translation-job surface:\n" +

@@ -1,8 +1,9 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import type { ReactNode } from "react";
+import { Suspense, type ReactNode } from "react";
 import LayoutContent from "../components/LayoutContent";
+import RouteUiTranslator from "@/components/RouteUiTranslator";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -97,6 +98,14 @@ ineum('autoPageDetection', { titleAsPageName: true });`
         ) : null}
       </head>
       <body className={`${inter.className} h-full m-0 p-0`}>
+        {/* Site-wide UI translation. author/ and learner/ also mount their own
+            scoped instance; both are idempotent, but without this one every
+            route outside those two (/, /dashboard, /admin, /chatbot) stayed
+            in the source language. Suspense because the hook reads
+            useSearchParams(). */}
+        <Suspense fallback={null}>
+          <RouteUiTranslator />
+        </Suspense>
         <LayoutContent>{children}</LayoutContent>
       </body>
     </html>

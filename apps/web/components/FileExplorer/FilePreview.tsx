@@ -78,7 +78,7 @@ const FilePreview = ({
 
   const getFileIcon = () => {
     const type = getFileType();
-    const iconProps = { size: 20, className: "text-purple-600" };
+    const iconProps = { size: 20, className: "text-brand-600" };
 
     switch (type) {
       case "image":
@@ -255,7 +255,7 @@ const FilePreview = ({
               </p>
               <button
                 onClick={handleDownloadFile}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-lg transition-colors"
               >
                 <IconDownload size={16} />
                 Download Image
@@ -405,7 +405,7 @@ const FilePreview = ({
           <div className="space-x-2">
             <button
               onClick={handleDownloadFile}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-lg transition-colors"
             >
               <IconDownload size={16} />
               Download Video
@@ -426,10 +426,10 @@ const FilePreview = ({
   );
 
   const renderAudio = () => (
-    <div className="h-full flex flex-col items-center justify-center bg-gradient-to-br from-purple-50 to-purple-50 dark:from-purple-900/20 dark:to-purple-900/20">
+    <div className="h-full flex flex-col items-center justify-center bg-gradient-to-br from-brand-50 to-brand-50 dark:from-brand-900/20 dark:to-brand-900/20">
       <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl max-w-md w-full mx-4">
         <div className="flex items-center gap-4 mb-6">
-          <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-500 rounded-xl flex items-center justify-center">
+          <div className="w-16 h-16 bg-gradient-to-br from-brand-500 to-brand-500 rounded-xl flex items-center justify-center">
             <IconMusic size={32} className="text-white" />
           </div>
           <div>
@@ -459,7 +459,7 @@ const FilePreview = ({
             <div className="space-x-2">
               <button
                 onClick={handleDownloadFile}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-lg transition-colors"
               >
                 <IconDownload size={16} />
                 Download Audio
@@ -521,7 +521,7 @@ const FilePreview = ({
           <div className="space-x-2">
             <button
               onClick={handleDownloadFile}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-lg transition-colors"
             >
               <IconDownload size={16} />
               Download PDF
@@ -565,7 +565,7 @@ const FilePreview = ({
         <div className="space-y-2">
           <button
             onClick={handleDownloadFile}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-lg font-medium transition-colors"
           >
             <IconDownload size={18} />
             Download File
@@ -591,7 +591,7 @@ const FilePreview = ({
       return (
         <div className="h-full flex items-center justify-center">
           <div className="flex flex-col items-center gap-4">
-            <IconLoader2 size={32} className="animate-spin text-purple-600" />
+            <IconLoader2 size={32} className="animate-spin text-brand-600" />
             <p className="text-gray-600 dark:text-gray-400">Loading...</p>
           </div>
         </div>
@@ -615,7 +615,7 @@ const FilePreview = ({
                   setError(null);
                   setIsLoading(true);
                 }}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-lg transition-colors"
               >
                 <IconRefresh size={16} />
                 Retry
@@ -630,7 +630,7 @@ const FilePreview = ({
               {content?.url && (
                 <button
                   onClick={openInNewTab}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-lg transition-colors"
                 >
                   <IconExternalLink size={16} />
                   Direct Link
@@ -655,7 +655,7 @@ const FilePreview = ({
             </p>
             <button
               onClick={handleDownloadFile}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-lg transition-colors"
             >
               <IconDownload size={16} />
               Download Instead

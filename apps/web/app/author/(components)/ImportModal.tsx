@@ -890,7 +890,7 @@ const ImportModal: React.FC<ImportModalProps> = ({
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
           <div className="flex items-center gap-3">
-            <DocumentArrowUpIcon className="w-6 h-6 text-purple-600 dark:text-purple-300" />
+            <DocumentArrowUpIcon className="w-6 h-6 text-brand-600 dark:text-brand-300" />
             <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
               Import Questions
             </h2>
@@ -915,7 +915,7 @@ const ImportModal: React.FC<ImportModalProps> = ({
                   className={cn(
                     "border-2 border-dashed rounded-lg p-8 text-center transition-colors",
                     dragActive
-                      ? "border-purple-500 bg-purple-50 dark:bg-purple-900/20"
+                      ? "border-brand-500 bg-brand-50 dark:bg-brand-900/20"
                       : "border-gray-300 dark:border-gray-600 hover:border-gray-400",
                   )}
                   onDragEnter={handleDrag}
@@ -928,7 +928,7 @@ const ImportModal: React.FC<ImportModalProps> = ({
                     Drop your file here, or{" "}
                     <button
                       onClick={() => fileInputRef.current?.click()}
-                      className="text-purple-600 dark:text-purple-300 hover:text-purple-700 underline"
+                      className="text-brand-600 dark:text-brand-300 hover:text-brand-700 underline"
                     >
                       browse
                     </button>
@@ -961,9 +961,9 @@ const ImportModal: React.FC<ImportModalProps> = ({
                 )}
 
                 {isProcessing && (
-                  <div className="flex items-center gap-3 p-4 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg">
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-purple-600"></div>
-                    <p className="text-purple-900 dark:text-purple-200">
+                  <div className="flex items-center gap-3 p-4 bg-brand-50 dark:bg-brand-900/20 border border-brand-200 dark:border-brand-800 rounded-lg">
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-brand-600"></div>
+                    <p className="text-brand-900 dark:text-brand-200">
                       Processing file...
                     </p>
                   </div>
@@ -994,13 +994,13 @@ const ImportModal: React.FC<ImportModalProps> = ({
 
           {importStep === "configure" && parsedData && (
             <div className="space-y-6">
-              <div className="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-4">
-                <h3 className="font-medium text-purple-900 dark:text-purple-200 mb-2">
+              <div className="bg-brand-50 dark:bg-brand-900/20 border border-brand-200 dark:border-brand-800 rounded-lg p-4">
+                <h3 className="font-medium text-brand-900 dark:text-brand-200 mb-2">
                   Import Summary
                 </h3>
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
-                    <span className="text-purple-700 dark:text-purple-300">
+                    <span className="text-brand-700 dark:text-brand-300">
                       Questions found:{" "}
                     </span>
                     <span className="font-medium">
@@ -1008,7 +1008,7 @@ const ImportModal: React.FC<ImportModalProps> = ({
                     </span>
                   </div>
                   <div>
-                    <span className="text-purple-700 dark:text-purple-300">
+                    <span className="text-brand-700 dark:text-brand-300">
                       File format:{" "}
                     </span>
                     <span className="font-medium">
@@ -1017,7 +1017,7 @@ const ImportModal: React.FC<ImportModalProps> = ({
                   </div>
                   {parsedData.assignment && (
                     <div>
-                      <span className="text-purple-700 dark:text-purple-300">
+                      <span className="text-brand-700 dark:text-brand-300">
                         Assignment data:{" "}
                       </span>
                       <span className="font-medium">Available</span>
@@ -1025,7 +1025,7 @@ const ImportModal: React.FC<ImportModalProps> = ({
                   )}
                   {parsedData.config && (
                     <div>
-                      <span className="text-purple-700 dark:text-purple-300">
+                      <span className="text-brand-700 dark:text-brand-300">
                         Configuration:{" "}
                       </span>
                       <span className="font-medium">Available</span>
@@ -1049,7 +1049,7 @@ const ImportModal: React.FC<ImportModalProps> = ({
                         onChange={() =>
                           handleImportOptionChange("appendToExisting")
                         }
-                        className="text-purple-600 dark:text-purple-300 focus:ring-purple-500"
+                        className="text-brand-600 dark:text-brand-300 focus:ring-brand-500"
                       />
 
                       <label
@@ -1067,7 +1067,7 @@ const ImportModal: React.FC<ImportModalProps> = ({
                         onChange={() =>
                           handleImportOptionChange("replaceExisting")
                         }
-                        className="text-purple-600 dark:text-purple-300 focus:ring-purple-500"
+                        className="text-brand-600 dark:text-brand-300 focus:ring-brand-500"
                       />
 
                       <label
@@ -1132,7 +1132,7 @@ const ImportModal: React.FC<ImportModalProps> = ({
                             option.id as keyof ImportOptions,
                           )
                         }
-                        className="mt-0.5 text-purple-600 dark:text-purple-300 focus:ring-purple-500"
+                        className="mt-0.5 text-brand-600 dark:text-brand-300 focus:ring-brand-500"
                       />
 
                       <div>
@@ -1215,7 +1215,7 @@ const ImportModal: React.FC<ImportModalProps> = ({
                       !e.message.includes("will be auto-generated"),
                   ).length > 0)
               }
-              className="px-4 py-2 text-sm font-medium text-white bg-purple-600 border border-transparent rounded-md hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+              className="px-4 py-2 text-sm font-medium text-white bg-brand-600 border border-transparent rounded-md hover:bg-brand-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
             >
               <DocumentArrowUpIcon className="w-4 h-4" />
               Import {parsedData?.questions?.length || 0} Questions

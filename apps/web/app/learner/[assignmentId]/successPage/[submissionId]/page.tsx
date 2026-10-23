@@ -1042,7 +1042,7 @@ function SuccessPage() {
                       Your Comments:
                     </label>
                     <textarea
-                      className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
                       rows={3}
                       value={comments}
                       onChange={(e) => setComments(e.target.value)}
@@ -1072,7 +1072,7 @@ function SuccessPage() {
                         </label>
                         <input
                           type="text"
-                          className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                          className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
                           value={firstName}
                           onChange={(e) => setFirstName(e.target.value)}
                           placeholder="Enter your first name"
@@ -1084,7 +1084,7 @@ function SuccessPage() {
                         </label>
                         <input
                           type="text"
-                          className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                          className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
                           value={lastName}
                           onChange={(e) => setLastName(e.target.value)}
                           placeholder="Enter your last name"
@@ -1096,7 +1096,7 @@ function SuccessPage() {
                         </label>
                         <input
                           type="email"
-                          className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                          className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="Enter your email address"

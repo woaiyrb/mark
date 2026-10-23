@@ -224,7 +224,7 @@ export function DashboardFilters({
                     </span>
                   )}
                   {currentFilters.userId && (
-                    <span className="bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-200 text-xs px-2 py-1 rounded">
+                    <span className="bg-brand-100 text-brand-800 dark:bg-brand-900/30 dark:text-brand-200 text-xs px-2 py-1 rounded">
                       User: {currentFilters.userId}
                     </span>
                   )}

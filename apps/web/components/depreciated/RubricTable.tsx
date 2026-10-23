@@ -25,7 +25,7 @@ function RubricTableProps(props: RubricTableProps) {
         <div className="sm:flex-auto">
           <h1 className="text-base font-semibold leading-6 text-gray-900 relative">
             Point Distributon for the Rubric
-            <span className="absolute -top-1 left-38 text-purple-400">*</span>
+            <span className="absolute -top-1 left-38 text-brand-400">*</span>
           </h1>
         </div>
       </div>

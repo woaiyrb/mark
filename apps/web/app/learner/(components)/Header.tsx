@@ -27,7 +27,7 @@ import {
 } from "@/lib/utils";
 import {
   isSupportedUiLanguage,
-  DEFAULT_UI_LANGUAGE,
+  INITIAL_UI_LANGUAGE,
   setStoredUiLanguage,
 } from "@/lib/ui-language";
 import {
@@ -575,41 +575,13 @@ function LearnerHeader() {
       return;
     }
 
-    setStoredUiLanguage(userPreferedLanguage);
-
-    // Storing the language above is what actually switches the UI: the
-    // translator reads storage and the change event, not the URL. So the
-    // routes that must not be re-navigated stop here, the way the sibling
-    // `lang` sync already does. Replacing the URL of an attempt route re-runs
-    // its server component, which is where an attempt gets created — that is
-    // how a language change used to land a learner on a fresh attempt.
-    if (isInQuestionPage || isAttemptPage || isSuccessPage) {
-      return;
-    }
-
-    const currentUiLanguage = searchParams.get("uiLang") || DEFAULT_UI_LANGUAGE;
-    if (currentUiLanguage === userPreferedLanguage) {
-      return;
-    }
-
-    const params = new URLSearchParams(searchParams.toString());
-    if (userPreferedLanguage === DEFAULT_UI_LANGUAGE) {
-      params.delete("uiLang");
-    } else {
-      params.set("uiLang", userPreferedLanguage);
-    }
-
-    const query = params.toString();
-    router.replace(query ? `${pathname}?${query}` : pathname, undefined);
-  }, [
-    isInQuestionPage,
-    isAttemptPage,
-    isSuccessPage,
-    pathname,
-    router,
-    searchParams,
-    userPreferedLanguage,
-  ]);
+    // Chinese-only deployment: the language a learner reads the assignment in
+    // must not move the chrome. Upstream stored `userPreferedLanguage` here,
+    // which is what flipped the whole learner UI back to English whenever the
+    // assignment itself was served in English. The content language is kept
+    // (and synced to `?lang` above); only the UI stays Chinese.
+    setStoredUiLanguage(INITIAL_UI_LANGUAGE);
+  }, [userPreferedLanguage]);
 
   useEffect(() => {
     const handleSubmitEvent = () => {
@@ -634,7 +606,9 @@ function LearnerHeader() {
           a desktop browser inside a narrow course-player iframe — gets the
           stacked layout, which wraps. The route root is overflow-hidden, so a
           row that does not fit is clipped away rather than scrolled to. */}
-      <header className="border-b border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 w-full px-4 sm:px-6 py-4 lg:py-6 min-h-[80px] lg:h-[100px]">
+      <header className="mark-glass relative w-full border-b border-gray-200/70 px-4 py-4 shadow-[0_10px_30px_-26px_rgb(24_28_60/0.5)] sm:px-6 lg:py-6 lg:h-[100px] min-h-[80px] dark:border-gray-700/60">
+        {/* Brand hairline — same accent strip as the author bar. */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-brand-sheen" />
         <div
           data-testid="learner-header-compact"
           className="flex flex-col gap-3 lg:hidden"
@@ -720,7 +694,7 @@ function LearnerHeader() {
           {returnUrl && pathname.includes("successPage") ? (
             <Link
               href={returnUrl}
-              className="px-4 py-2 bg-violet-100 hover:bg-violet-200 text-violet-800 border rounded-md transition flex items-center justify-center gap-2 text-sm"
+              className="flex items-center justify-center gap-2 rounded-pill border border-violet-200 bg-violet-100 px-4 py-2 text-sm text-violet-800 shadow-sm transition-all hover:-translate-y-px hover:bg-violet-200 hover:shadow-soft dark:border-violet-800 dark:bg-violet-900/40 dark:text-violet-100"
             >
               Return to Course
             </Link>
@@ -806,7 +780,7 @@ function LearnerHeader() {
           {returnUrl && pathname.includes("successPage") ? (
             <Link
               href={returnUrl}
-              className="px-6 py-3 bg-violet-100 hover:bg-violet-200 text-violet-800 border rounded-md transition flex items-center gap-2"
+              className="flex items-center gap-2 rounded-pill border border-violet-200 bg-violet-100 px-6 py-3 text-violet-800 shadow-sm transition-all hover:-translate-y-px hover:bg-violet-200 hover:shadow-soft dark:border-violet-800 dark:bg-violet-900/40 dark:text-violet-100"
             >
               Return to Course
             </Link>
@@ -832,9 +806,7 @@ function LearnerHeader() {
           assignmentId && currentAttemptId
             ? () => {
                 setShowGradingModal(false);
-                router.push(
-                  learnerSuccessPath(assignmentId, currentAttemptId),
-                );
+                router.push(learnerSuccessPath(assignmentId, currentAttemptId));
               }
             : undefined
         }

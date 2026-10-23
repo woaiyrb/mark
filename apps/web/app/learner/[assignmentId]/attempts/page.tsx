@@ -222,7 +222,7 @@ export default function AssignmentAttempts() {
                 "_self",
               );
             }}
-            className="flex items-center gap-1 text-purple-600 hover:text-violet-600 underline"
+            className="flex items-center gap-1 text-brand-600 hover:text-violet-600 underline"
             aria-label={`View details for Attempt ${row.attemptNumber}`}
           >
             View

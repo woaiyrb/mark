@@ -34,7 +34,7 @@ const TooltipMessage: FC<TooltipMessageProps> = ({
         {!isValid && showAction && (
           <button
             onClick={onNavigate}
-            className="ml-2 text-purple-500 hover:underline"
+            className="ml-2 text-brand-500 hover:underline"
           >
             Take me there
           </button>

@@ -589,7 +589,7 @@ const VideoPresentationEditor = ({
             </button>
             <button
               onClick={openEditorModal}
-              className="px-5 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition"
+              className="px-5 py-2 bg-brand-600 text-white rounded hover:bg-brand-700 transition"
             >
               Edit/Trim Video
             </button>
@@ -753,7 +753,7 @@ const VideoPresentationEditor = ({
                 className={`px-4 py-2 rounded text-white ${
                   !ffmpegLoaded || processingTrim
                     ? "bg-gray-400"
-                    : "bg-purple-600 hover:bg-purple-700"
+                    : "bg-brand-600 hover:bg-brand-700"
                 }`}
               >
                 {processingTrim ? "Trimming..." : "Trim Now"}

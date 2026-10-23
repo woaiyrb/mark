@@ -120,3 +120,9 @@ out/
 /playwright/.cache/
 /playwright/.auth/
 .claude/settings.local.json
+
+# Local, no-Docker dev runtime (Postgres/Redis binaries + data)
+.local-dev/
+
+# Local install/run artifacts
+install.err

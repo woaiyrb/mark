@@ -680,7 +680,7 @@ export default function PresentationGrader({
                 void startRecording();
               }}
               disabled={feedbackLoading || processing}
-              className="flex items-center space-x-2 px-5 py-3 bg-purple-600 text-white rounded hover:bg-purple-700 transition disabled:bg-purple-300"
+              className="flex items-center space-x-2 px-5 py-3 bg-brand-600 text-white rounded hover:bg-brand-700 transition disabled:bg-brand-300"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

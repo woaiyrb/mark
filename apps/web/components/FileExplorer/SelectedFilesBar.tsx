@@ -81,7 +81,7 @@ const SelectedFilesBar: React.FC<SelectedFilesBarProps> = ({
         </button>
 
         <button
-          className="px-4 py-1 text-sm bg-purple-600 text-white rounded hover:bg-purple-700"
+          className="px-4 py-1 text-sm bg-brand-600 text-white rounded hover:bg-brand-700"
           onClick={onContinue}
         >
           Continue

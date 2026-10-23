@@ -52,8 +52,8 @@ function Dropdown(props: DropdownProps) {
           type="button"
           onClick={toggleModelPicker}
           className={cn(
-            "w-full transition-all flex justify-between items-center pl-4 px-3 py-3 text-left border border-gray-300 focus:outline-none focus:border-transparent focus:ring-1 focus:ring-purple-600",
-            isOpen ? "rounded-t-md ring-purple-600 ring-1" : "rounded-md",
+            "w-full transition-all flex justify-between items-center pl-4 px-3 py-3 text-left border border-gray-300 focus:outline-none focus:border-transparent focus:ring-1 focus:ring-brand-600",
+            isOpen ? "rounded-t-md ring-brand-600 ring-1" : "rounded-md",
           )}
           {...rest}
         >

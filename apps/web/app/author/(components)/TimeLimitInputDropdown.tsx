@@ -49,8 +49,8 @@ const Component: FC<Props> = (props) => {
           type="button"
           onClick={() => setIsOpen(true)}
           className={cn(
-            "w-full transition-all flex gap-x-2 justify-between items-center border relative border-gray-300 dark:border-gray-600 rounded-md h-12 pl-4 pr-3 py-2 focus:outline-none focus:border-transparent focus:ring-1 focus:ring-purple-600",
-            isOpen ? "rounded-t-md ring-purple-600 ring-1" : "rounded-md",
+            "w-full transition-all flex gap-x-2 justify-between items-center border relative border-gray-300 dark:border-gray-600 rounded-md h-12 pl-4 pr-3 py-2 focus:outline-none focus:border-transparent focus:ring-1 focus:ring-brand-600",
+            isOpen ? "rounded-t-md ring-brand-600 ring-1" : "rounded-md",
           )}
         >
           {value ? (

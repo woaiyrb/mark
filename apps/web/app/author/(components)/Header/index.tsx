@@ -24,12 +24,6 @@ import {
 } from "@/config/types";
 import { extractAssignmentId } from "@/lib/strings";
 import {
-  DEFAULT_UI_LANGUAGE,
-  isSupportedUiLanguage,
-  setStoredUiLanguage,
-} from "@/lib/ui-language";
-import { useActiveUiLanguage } from "@/hooks/use-active-ui-language";
-import {
   getActivePublishJob,
   getAssignment,
   getUser,
@@ -37,17 +31,17 @@ import {
   retryFailedTranslations,
   subscribeToJobStatus,
 } from "@/lib/talkToBackend";
-import languages from "@/public/languages.json";
 import { useAssignmentConfig } from "@/stores/assignmentConfig";
 import { useAssignmentFeedbackConfig } from "@/stores/assignmentFeedbackConfig";
 import { useAuthorStore } from "@/stores/author";
 import SNIcon from "@components/SNIcon";
 import ThemeToggle from "@/components/ThemeToggle";
 import Title from "@components/Title";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import { BarChart3 } from "lucide-react";
-import React, { useEffect, useMemo, useState } from "react";
+import { BarChart3, LayoutDashboard } from "lucide-react";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useQuestionsAreReadyToBePublished } from "../../../Helpers/checkQuestionsReady";
 import { Nav } from "./Nav";
@@ -94,23 +88,8 @@ function normalizeAssignment(assignment: Assignment): Assignment {
 function AuthorHeader() {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const { isOpen: isChatbotOpen } = useChatbot();
   const assignmentId = extractAssignmentId(pathname);
-  // Shared resolution hook, not an inline copy of its rules — a divergence
-  // here shows up as the header dropdown disagreeing with what the route
-  // translator actually applies.
-  const uiLanguage = useActiveUiLanguage();
-  const languageOptions = useMemo(
-    () =>
-      [...languages]
-        .sort((a, b) => a.name.localeCompare(b.name))
-        .map((language) => ({
-          value: language.code,
-          label: language.name,
-        })),
-    [],
-  );
   const [currentStepId, setCurrentStepId] = useState<number>(0);
   const setQuestions = useAuthorStore((state) => state.setQuestions);
   const setUserRole = useMarkChatStore((s) => s.setUserRole);
@@ -815,25 +794,6 @@ function AuthorHeader() {
     setDraftName("");
   };
 
-  const handleChangeUiLanguage = (selectedLanguage: string) => {
-    if (!isSupportedUiLanguage(selectedLanguage)) return;
-    if (selectedLanguage === uiLanguage) return;
-
-    // Persisting dispatches UI_LANGUAGE_CHANGED_EVENT, which updates every
-    // useActiveUiLanguage instance — including this header's.
-    setStoredUiLanguage(selectedLanguage);
-
-    const params = new URLSearchParams(searchParams.toString());
-    if (selectedLanguage === DEFAULT_UI_LANGUAGE) {
-      params.delete("uiLang");
-    } else {
-      params.set("uiLang", selectedLanguage);
-    }
-
-    const query = params.toString();
-    router.replace(query ? `${pathname}?${query}` : pathname);
-  };
-
   return (
     <>
       <div
@@ -841,9 +801,21 @@ function AuthorHeader() {
           isChatbotOpen ? "left-0 right-[25vw]" : "w-full"
         }`}
       >
-        <header className="border-b border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 px-2 sm:px-4 md:px-6 py-2 md:py-4 flex flex-col">
+        <header className="mark-glass relative flex flex-col border-b border-gray-200/70 px-2 py-2 shadow-[0_10px_30px_-24px_rgb(24_28_60/0.55)] sm:px-4 md:px-6 md:py-3.5 dark:border-gray-700/60">
+          {/* Brand hairline — a TapTap-style accent strip on top of the bar. */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-brand-sheen" />
           <div className="flex flex-col flex-wrap lg:flex-nowrap md:flex-row md:items-center justify-between gap-2 md:gap-2">
             <div className="flex flex-row items-center space-x-4">
+              {/* Back to the teacher dashboard — keeps the author editor and
+                  the new dashboard one continuous product instead of two. */}
+              <Link
+                href="/dashboard"
+                className="flex items-center gap-1.5 rounded-lg border border-brand-200 bg-brand-50 px-2.5 py-1.5 text-xs font-medium text-brand-700 transition hover:bg-brand-100 hover:border-brand-300 dark:border-brand-800 dark:bg-brand-900/30 dark:text-brand-300 dark:hover:bg-brand-900/50"
+                title="返回教师工作台"
+              >
+                <LayoutDashboard className="h-4 w-4" />
+                <span className="hidden sm:inline">工作台</span>
+              </Link>
               <SNIcon />
               <div>
                 <Title level={5} className="leading-6">
@@ -866,15 +838,6 @@ function AuthorHeader() {
 
             <div className="flex flex-wrap items-center md:ml-auto gap-2 sm:gap-4 mt-2 md:mt-0 ml-auto">
               <ThemeToggle />
-              <div className="w-40 sm:w-52">
-                <Dropdown
-                  items={languageOptions}
-                  selectedItem={uiLanguage}
-                  setSelectedItem={handleChangeUiLanguage}
-                  placeholder="UI language"
-                  disableUiTranslation={true}
-                />
-              </div>
               <CheckLearnerSideButton
                 disabled={!questionsAreReadyToBePublished}
               />
@@ -888,7 +851,7 @@ function AuthorHeader() {
                         "_blank",
                       )
                     }
-                    className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-purple-600 dark:text-purple-300 bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-800 rounded-lg hover:bg-purple-100 dark:hover:bg-purple-900/50 hover:border-purple-300 dark:hover:border-purple-700 transition-all duration-200 shadow-sm hover:shadow-md"
+                    className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 shadow-sm hover:shadow-md text-brand-700 dark:text-brand-300 bg-brand-50 dark:bg-brand-900/30 border border-brand-200 dark:border-brand-800 hover:bg-brand-100 dark:hover:bg-brand-900/50 hover:border-brand-300 dark:hover:border-brand-700"
                     title="View insights and analytics for this assignment"
                   >
                     <BarChart3 className="w-4 h-4" />

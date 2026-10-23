@@ -15,6 +15,8 @@ import { JobModule } from "./Job/job.module";
 import { LlmModule } from "./llm/llm.module";
 import { ReportsModule } from "./report/report.module";
 import { ChatModule } from "./user/modules/chat.module";
+import { ClassModule } from "./class/class.module";
+import { KnowledgePointModule } from "./knowledge-point/knowledge-point.module";
 
 @Module({
   controllers: [ApiController, JobExecutorController],
@@ -32,6 +34,8 @@ import { ChatModule } from "./user/modules/chat.module";
     ReportsModule,
     ChatModule,
     FilesModule,
+    ClassModule,
+    KnowledgePointModule,
   ],
 })
 export class ApiModule {}

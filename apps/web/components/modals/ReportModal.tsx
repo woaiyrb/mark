@@ -57,7 +57,7 @@ const getIssueTypeColor = (issueType: string): string => {
     case "content_issue":
       return "bg-yellow-100 text-yellow-800";
     case "technical_issue":
-      return "bg-purple-100 text-purple-800";
+      return "bg-brand-100 text-brand-800";
     case "grading_issue":
       return "bg-orange-100 text-orange-800";
     default:

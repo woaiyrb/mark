@@ -470,14 +470,20 @@ export function AssignmentInsightsContent({
     setAttemptSortOrder("desc");
   };
 
+  // Skeleton mirrors the real layout (hero + KPI row + tabs + panel) so the
+  // page doesn't jump when the data lands.
   if (loading) {
     return (
-      <div className="container mx-auto p-6">
-        <div className="flex items-center justify-center py-12">
-          <div className="text-muted-foreground">
-            Loading detailed insights...
-          </div>
+      <div className="container mx-auto space-y-6 p-6">
+        <div className="mark-skeleton h-28 w-full !rounded-3xl" />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mark-skeleton h-24" />
+          <div className="mark-skeleton h-24" />
+          <div className="mark-skeleton h-24" />
+          <div className="mark-skeleton h-24" />
         </div>
+        <div className="mark-skeleton h-12 w-full max-w-xl !rounded-pill" />
+        <div className="mark-skeleton h-72 w-full" />
       </div>
     );
   }
@@ -497,17 +503,22 @@ export function AssignmentInsightsContent({
   return (
     <div className="min-h-screen w-full text-foreground">
       <div className="container mx-auto p-6 space-y-6">
-        <div className="flex items-center gap-4">
-          <div className="flex-1">
-            <div className="flex items-center gap-3">
-              <h1 className="text-2xl font-bold">{data.assignment.name}</h1>
+        {/* Hero band — the assignment title gets the loudest surface on the
+            page, the same way a game header does on a community feed. */}
+        <div className="mark-hero flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="relative z-10 flex flex-col gap-1">
+            <div className="flex flex-wrap items-center gap-3">
+              <h1 className="text-2xl font-bold sm:text-3xl">
+                {data.assignment.name}
+              </h1>
               <Badge
+                className="border-white/40 bg-white/20 text-white ring-1 ring-white/30"
                 variant={data.assignment.published ? "default" : "secondary"}
               >
                 {data.assignment.published ? "Published" : "Draft"}
               </Badge>
             </div>
-            <p className="text-muted-foreground">
+            <p className="text-sm text-white/85">
               Assignment ID: {data.assignment.id}
             </p>
           </div>
@@ -520,100 +531,98 @@ export function AssignmentInsightsContent({
           className={`grid grid-cols-1 md:grid-cols-2 ${isUserAdmin ? "lg:grid-cols-6" : "lg:grid-cols-4"} gap-4`}
         >
           {isUserAdmin && (
-            <Card>
-              <CardContent className="pt-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-muted-foreground">Total Cost</p>
-                    <p className="text-2xl font-bold">
-                      {formatCurrency(data.analytics.totalCost ?? 0)}
-                    </p>
-                  </div>
-                  <DollarSign className="h-8 w-8 text-green-600 dark:text-green-400" />
-                </div>
-              </CardContent>
-            </Card>
+            <div className="mark-kpi mark-entrance-1">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">
+                  Total Cost
+                </p>
+                <p className="text-2xl font-bold tracking-tight">
+                  {formatCurrency(data.analytics.totalCost ?? 0)}
+                </p>
+              </div>
+              <div className="mark-kpi-icon mark-kpi-icon-mint">
+                <DollarSign className="h-5 w-5" />
+              </div>
+            </div>
           )}
 
           {isUserAdmin && (
-            <Card>
-              <CardContent className="pt-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-muted-foreground">Authors</p>
-                    <p className="text-2xl font-bold">
-                      {data.authorActivity?.totalAuthors || 0}
-                    </p>
-                  </div>
-                  <FileText className="h-8 w-8 text-indigo-600 dark:text-indigo-400" />
-                </div>
-              </CardContent>
-            </Card>
+            <div className="mark-kpi mark-entrance-2">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">
+                  Authors
+                </p>
+                <p className="text-2xl font-bold tracking-tight">
+                  {data.authorActivity?.totalAuthors || 0}
+                </p>
+              </div>
+              <div className="mark-kpi-icon mark-kpi-icon-brand">
+                <FileText className="h-5 w-5" />
+              </div>
+            </div>
           )}
 
-          <Card>
-            <CardContent className="pt-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-muted-foreground">Learners</p>
-                  <p className="text-2xl font-bold">
-                    {data.analytics.uniqueLearners}
-                  </p>
-                </div>
-                <Users className="h-8 w-8 text-blue-600 dark:text-blue-400" />
-              </div>
-            </CardContent>
-          </Card>
+          <div className="mark-kpi mark-entrance-3">
+            <div>
+              <p className="text-sm font-medium text-muted-foreground">
+                Learners
+              </p>
+              <p className="text-2xl font-bold tracking-tight">
+                {data.analytics.uniqueLearners}
+              </p>
+            </div>
+            <div className="mark-kpi-icon mark-kpi-icon-brand">
+              <Users className="h-5 w-5" />
+            </div>
+          </div>
 
-          <Card>
-            <CardContent className="pt-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-muted-foreground">
-                    Completion Rate
-                  </p>
-                  <p className="text-2xl font-bold">
-                    {data.analytics.totalAttempts > 0
-                      ? `${Math.round((data.analytics.completedAttempts / data.analytics.totalAttempts) * 100)}%`
-                      : "N/A"}
-                  </p>
-                </div>
-                <TrendingUp className="h-8 w-8 text-orange-600 dark:text-orange-400" />
-              </div>
-            </CardContent>
-          </Card>
+          <div className="mark-kpi mark-entrance-4">
+            <div>
+              <p className="text-sm font-medium text-muted-foreground">
+                Completion Rate
+              </p>
+              <p className="text-2xl font-bold tracking-tight">
+                {data.analytics.totalAttempts > 0
+                  ? `${Math.round((data.analytics.completedAttempts / data.analytics.totalAttempts) * 100)}%`
+                  : "N/A"}
+              </p>
+            </div>
+            <div className="mark-kpi-icon mark-kpi-icon-sunny">
+              <TrendingUp className="h-5 w-5" />
+            </div>
+          </div>
 
-          <Card>
-            <CardContent className="pt-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-muted-foreground">Avg Grade</p>
-                  <p className="text-2xl font-bold">
-                    {data.analytics.averageGrade > 0
-                      ? `${data.analytics.averageGrade.toFixed(2)}%`
-                      : "N/A"}
-                  </p>
-                </div>
-                <BarChart3 className="h-8 w-8 text-purple-600 dark:text-purple-400" />
-              </div>
-            </CardContent>
-          </Card>
+          <div className="mark-kpi mark-entrance-5">
+            <div>
+              <p className="text-sm font-medium text-muted-foreground">
+                Avg Grade
+              </p>
+              <p className="text-2xl font-bold tracking-tight">
+                {data.analytics.averageGrade > 0
+                  ? `${data.analytics.averageGrade.toFixed(2)}%`
+                  : "N/A"}
+              </p>
+            </div>
+            <div className="mark-kpi-icon mark-kpi-icon-coral">
+              <BarChart3 className="h-5 w-5" />
+            </div>
+          </div>
 
-          <Card>
-            <CardContent className="pt-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-muted-foreground">Rating</p>
-                  <p className="text-2xl font-bold">
-                    {data.analytics.averageRating > 0
-                      ? data.analytics.averageRating.toFixed(1)
-                      : "N/A"}
-                  </p>
-                </div>
-                <Star className="h-8 w-8 text-yellow-500" />
-              </div>
-            </CardContent>
-          </Card>
+          <div className="mark-kpi mark-entrance-5">
+            <div>
+              <p className="text-sm font-medium text-muted-foreground">
+                Rating
+              </p>
+              <p className="text-2xl font-bold tracking-tight">
+                {data.analytics.averageRating > 0
+                  ? data.analytics.averageRating.toFixed(1)
+                  : "N/A"}
+              </p>
+            </div>
+            <div className="mark-kpi-icon mark-kpi-icon-sunny">
+              <Star className="h-5 w-5" />
+            </div>
+          </div>
         </div>
 
         <Tabs
@@ -622,9 +631,7 @@ export function AssignmentInsightsContent({
           className="space-y-6"
         >
           <TabsList
-            className={`
-        grid w-full ${isUserAdmin ? "grid-cols-7" : "grid-cols-4"} border-b mb-4
-        `}
+            className={`mb-2 grid w-full ${isUserAdmin ? "grid-cols-7" : "grid-cols-4"}`}
           >
             <TabsTrigger value="overview">Overview</TabsTrigger>
             {/* Authors, AI Usage, and Reports carry admin-only/internal data
@@ -703,7 +710,7 @@ export function AssignmentInsightsContent({
                 <Card>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
-                      <BarChart3 className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                      <BarChart3 className="h-5 w-5 text-brand-500 dark:text-brand-400" />
                       Cost Analysis Breakdown
                     </CardTitle>
                   </CardHeader>
@@ -711,7 +718,7 @@ export function AssignmentInsightsContent({
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                       <div className="text-center">
                         <div className="flex items-center justify-center w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full mx-auto mb-3">
-                          <TrendingUp className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                          <TrendingUp className="h-6 w-6 text-brand-500 dark:text-brand-400" />
                         </div>
                         <div className="text-sm text-muted-foreground mb-2">
                           Cost per Attempt
@@ -731,7 +738,7 @@ export function AssignmentInsightsContent({
 
                       <div className="text-center">
                         <div className="flex items-center justify-center w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full mx-auto mb-3">
-                          <FileText className="h-6 w-6 text-green-600 dark:text-green-400" />
+                          <FileText className="h-6 w-6 text-mint-500 dark:text-mint-400" />
                         </div>
                         <div className="text-sm text-muted-foreground mb-2">
                           Authoring Costs
@@ -758,13 +765,13 @@ export function AssignmentInsightsContent({
                       </div>
 
                       <div className="text-center">
-                        <div className="flex items-center justify-center w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full mx-auto mb-3">
-                          <Users className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+                        <div className="flex items-center justify-center w-12 h-12 bg-brand-100 dark:bg-brand-900/30 rounded-full mx-auto mb-3">
+                          <Users className="h-6 w-6 text-coral-500 dark:text-coral-400" />
                         </div>
                         <div className="text-sm text-muted-foreground mb-2">
                           Grading Costs
                         </div>
-                        <div className="text-2xl font-bold text-purple-700 dark:text-purple-300">
+                        <div className="text-2xl font-bold text-brand-700 dark:text-brand-300">
                           {formatCurrency(
                             (data.aiUsage ?? [])
                               .filter((usage) =>
@@ -821,7 +828,7 @@ export function AssignmentInsightsContent({
                         </div>
 
                         <div>
-                          <h4 className="font-semibold text-sm mb-3 text-purple-700 dark:text-purple-300">
+                          <h4 className="font-semibold text-sm mb-3 text-brand-700 dark:text-brand-300">
                             Grading Details
                           </h4>
                           <div className="space-y-2">
@@ -871,7 +878,7 @@ export function AssignmentInsightsContent({
                     {data.analytics.performanceInsights.map(
                       (insight, index) => (
                         <li key={index} className="flex items-start gap-2">
-                          <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
+                          <CheckCircle className="h-4 w-4 text-mint-500 dark:text-mint-400 mt-0.5 flex-shrink-0" />
                           <span className="text-sm">{insight}</span>
                         </li>
                       ),
@@ -906,7 +913,7 @@ export function AssignmentInsightsContent({
                               active contributors
                             </p>
                           </div>
-                          <Users className="h-8 w-8 text-indigo-600 dark:text-indigo-400" />
+                          <Users className="h-8 w-8 text-violet-500 dark:text-violet-400" />
                         </div>
                       </CardContent>
                     </Card>
@@ -927,7 +934,7 @@ export function AssignmentInsightsContent({
                               assignments
                             </p>
                           </div>
-                          <TrendingUp className="h-8 w-8 text-green-600 dark:text-green-400" />
+                          <TrendingUp className="h-8 w-8 text-mint-500 dark:text-mint-400" />
                         </div>
                       </CardContent>
                     </Card>
@@ -949,7 +956,7 @@ export function AssignmentInsightsContent({
                               by all authors combined
                             </p>
                           </div>
-                          <BarChart3 className="h-8 w-8 text-purple-600 dark:text-purple-400" />
+                          <BarChart3 className="h-8 w-8 text-coral-500 dark:text-coral-400" />
                         </div>
                       </CardContent>
                     </Card>
@@ -971,7 +978,7 @@ export function AssignmentInsightsContent({
                                 key={index}
                                 className="flex items-start gap-2"
                               >
-                                <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
+                                <CheckCircle className="h-4 w-4 text-mint-500 dark:text-mint-400 mt-0.5 flex-shrink-0" />
                                 <span className="text-sm">{insight}</span>
                               </li>
                             ),
@@ -1019,7 +1026,7 @@ export function AssignmentInsightsContent({
                               <TableCell className="font-mono text-sm">
                                 <div className="flex items-center gap-2">
                                   <div className="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center">
-                                    <span className="text-xs font-semibold text-indigo-600 dark:text-indigo-400">
+                                    <span className="text-xs font-semibold text-violet-500 dark:text-violet-400">
                                       {author.userId
                                         .split("@")[0]
                                         ?.substring(0, 2)
@@ -1282,9 +1289,9 @@ export function AssignmentInsightsContent({
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 bg-muted/50 rounded-lg">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 bg-muted/50 rounded-2xl">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                    <div className="text-2xl font-bold text-brand-500 dark:text-brand-400">
                       {filteredAttempts.length}
                     </div>
                     <div className="text-sm text-muted-foreground">
@@ -1292,7 +1299,7 @@ export function AssignmentInsightsContent({
                     </div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-green-600 dark:text-green-400">
+                    <div className="text-2xl font-bold text-mint-500 dark:text-mint-400">
                       {filteredAttempts.filter((a) => a.submitted).length}
                     </div>
                     <div className="text-sm text-muted-foreground">
@@ -1300,7 +1307,7 @@ export function AssignmentInsightsContent({
                     </div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">
+                    <div className="text-2xl font-bold text-sunny-500 dark:text-sunny-400">
                       {filteredAttempts.filter((a) => !a.submitted).length}
                     </div>
                     <div className="text-sm text-muted-foreground">
@@ -1308,7 +1315,7 @@ export function AssignmentInsightsContent({
                     </div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+                    <div className="text-2xl font-bold text-coral-500 dark:text-coral-400">
                       {
                         filteredAttempts.filter(
                           (a) => a.grade !== null && a.grade >= 0.6,
@@ -1416,7 +1423,7 @@ export function AssignmentInsightsContent({
                               <span
                                 className={
                                   attempt.grade >= 0.6
-                                    ? "text-green-600 dark:text-green-400 font-semibold"
+                                    ? "text-mint-500 dark:text-mint-400 font-semibold"
                                     : "text-red-600 dark:text-red-400 font-semibold"
                                 }
                               >
@@ -1645,13 +1652,13 @@ export function AssignmentInsightsContent({
 
                 <Card>
                   <CardHeader>
-                    <CardTitle className="flex items-center gap-2 text-purple-700 dark:text-purple-300">
+                    <CardTitle className="flex items-center gap-2 text-brand-700 dark:text-brand-300">
                       <Users className="h-5 w-5" />
                       Grading Costs
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-3xl font-bold text-purple-700 dark:text-purple-300 mb-4">
+                    <div className="text-3xl font-bold text-brand-700 dark:text-brand-300 mb-4">
                       {formatCurrency(
                         (data.aiUsage ?? [])
                           .filter((usage) =>
@@ -1766,7 +1773,7 @@ export function AssignmentInsightsContent({
                                         "GRADING_VALIDATION",
                                         "ASSIGNMENT_GRADING",
                                       ].includes(usage.usageType)
-                                    ? "border-purple-300 dark:border-purple-700 text-purple-700 dark:text-purple-300"
+                                    ? "border-brand-300 dark:border-brand-700 text-brand-700 dark:text-brand-300"
                                     : ""
                               }
                             >
@@ -1793,7 +1800,7 @@ export function AssignmentInsightsContent({
                               )}
                             </div>
                           </TableCell>
-                          <TableCell className="text-center font-mono font-semibold text-green-600 dark:text-green-400">
+                          <TableCell className="text-center font-mono font-semibold text-mint-500 dark:text-mint-400">
                             {formatCurrency(usage.totalCost)}
                           </TableCell>
                           {showDetailedUsage && (
@@ -1804,10 +1811,10 @@ export function AssignmentInsightsContent({
                               <TableCell className="text-center font-mono">
                                 {usage.tokensOut.toLocaleString()}
                               </TableCell>
-                              <TableCell className="text-center font-mono text-blue-600 dark:text-blue-400">
+                              <TableCell className="text-center font-mono text-brand-500 dark:text-brand-400">
                                 {formatCurrency(usage.inputCost)}
                               </TableCell>
-                              <TableCell className="text-center font-mono text-purple-600 dark:text-purple-400">
+                              <TableCell className="text-center font-mono text-coral-500 dark:text-coral-400">
                                 {formatCurrency(usage.outputCost)}
                               </TableCell>
                               <TableCell>
@@ -1834,7 +1841,7 @@ export function AssignmentInsightsContent({
                       {(data.aiUsage ?? []).map((usage, index) => (
                         <div
                           key={index}
-                          className="border rounded-lg p-4 bg-slate-50 dark:bg-slate-900/20"
+                          className="rounded-2xl border p-4 bg-slate-50 dark:bg-slate-900/20"
                         >
                           <div className="flex justify-between items-start mb-2">
                             <div className="flex items-center gap-2">
@@ -1843,18 +1850,18 @@ export function AssignmentInsightsContent({
                                 {usage.modelUsed}
                               </Badge>
                             </div>
-                            <span className="font-semibold text-green-600 dark:text-green-400">
+                            <span className="font-semibold text-mint-500 dark:text-mint-400">
                               {formatCurrency(usage.totalCost)}
                             </span>
                           </div>
                           <div className="font-mono text-sm space-y-1 text-slate-700 dark:text-slate-300">
-                            <div className="text-blue-600 dark:text-blue-400">
+                            <div className="text-brand-500 dark:text-brand-400">
                               {usage.calculationSteps.inputCalculation}
                             </div>
-                            <div className="text-purple-600 dark:text-purple-400">
+                            <div className="text-coral-500 dark:text-coral-400">
                               {usage.calculationSteps.outputCalculation}
                             </div>
-                            <div className="text-green-600 dark:text-green-400 font-semibold">
+                            <div className="text-mint-500 dark:text-mint-400 font-semibold">
                               {usage.calculationSteps.totalCalculation}
                             </div>
                           </div>

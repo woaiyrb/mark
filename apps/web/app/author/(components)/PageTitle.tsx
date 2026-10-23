@@ -7,10 +7,14 @@ interface PageTitleProps {
 }
 
 const PageTitle: FC<PageTitleProps> = ({ title, description }) => (
-  <section className="flex flex-col gap-y-1.5 text-gray-900 dark:text-gray-100">
-    <Title level={1}>{title}</Title>
+  <section className="flex flex-col gap-y-2 text-gray-900 dark:text-gray-100">
+    <div className="mark-title-accent">
+      <Title level={1} className="tracking-tight">
+        {title}
+      </Title>
+    </div>
     {description && (
-      <p className="w-full text-base font-[450] text-gray-600 dark:text-gray-300">
+      <p className="max-w-3xl text-base font-[450] leading-7 text-gray-600 dark:text-gray-300">
         {description}
       </p>
     )}

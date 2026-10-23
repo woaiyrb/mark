@@ -133,9 +133,9 @@ export function AdminLogin({ onAuthenticated }: AdminLoginProps) {
                 </AlertDescription>
               </Alert>
 
-              <Alert className="border-purple-200 bg-purple-50 dark:border-purple-800 dark:bg-purple-900/30">
-                <MessageSquare className="h-4 w-4 text-purple-600 dark:text-purple-400" />
-                <AlertDescription className="text-purple-800 dark:text-purple-200">
+              <Alert className="border-brand-200 bg-brand-50 dark:border-brand-800 dark:bg-brand-900/30">
+                <MessageSquare className="h-4 w-4 text-brand-600 dark:text-brand-400" />
+                <AlertDescription className="text-brand-800 dark:text-brand-200">
                   <strong>Super user privileges?</strong> Contact the developers
                   or stakeholders for elevated access.
                 </AlertDescription>

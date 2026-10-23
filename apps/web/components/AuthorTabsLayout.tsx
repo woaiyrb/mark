@@ -52,9 +52,9 @@ export function AuthorTabsLayout({
         onValueChange={handleTabChange}
         className="w-full"
       >
-        <div className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-40">
-          <div className="container mx-auto px-4">
-            <TabsList className="grid w-full grid-cols-4 lg:w-auto lg:inline-flex">
+        <div className="sticky top-0 z-40 border-b border-gray-200/70 bg-white/85 backdrop-blur-xl dark:border-gray-700/60 dark:bg-gray-900/85">
+          <div className="mx-auto flex max-w-6xl justify-center px-4 py-3">
+            <TabsList className="grid w-full grid-cols-4 shadow-card lg:w-auto lg:inline-flex">
               <TabsTrigger value="overview" className="flex items-center gap-2">
                 <FileText className="h-4 w-4" />
                 <span className="hidden sm:inline">Overview</span>

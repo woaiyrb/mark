@@ -378,7 +378,7 @@ function Timer(props: Props) {
           translate="no"
           className={cn(
             "text-base font-bold leading-tight",
-            hours === 0 && minutes < 5 ? "text-red-500" : "text-purple-600",
+            hours === 0 && minutes < 5 ? "text-red-500" : "text-brand-600",
           )}
         >
           {twoDigit(hours)}:{twoDigit(minutes)}:{twoDigit(seconds)}

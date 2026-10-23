@@ -11,7 +11,7 @@ import {
 } from "@/config/types";
 import { getSupportedLanguages } from "@/lib/talkToBackend";
 import {
-  DEFAULT_UI_LANGUAGE,
+  INITIAL_UI_LANGUAGE,
   pickDefaultAssignmentLanguage,
   setStoredUiLanguage,
 } from "@/lib/ui-language";
@@ -49,8 +49,8 @@ const AssignmentSection: FC<AssignmentSectionProps> = ({ title, content }) => {
   );
   const questionControls = assignmentDetails?.questionControls;
   return (
-    <div className="bg-white dark:bg-gray-800 shadow rounded-lg overflow-hidden">
-      <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200 dark:border-gray-700">
+    <div className="mark-card overflow-hidden">
+      <div className="flex items-center justify-between gap-3 border-b border-gray-200/80 bg-gradient-to-r from-violet-50/70 to-transparent px-4 py-3 sm:px-6 sm:py-4 dark:border-gray-700/70 dark:from-violet-900/25">
         <h2 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-200">
           {title}
         </h2>
@@ -267,7 +267,8 @@ const AboutTheAssignment: FC<AboutTheAssignmentProps> = ({
   ]);
 
   const handleConfirm = () => {
-    const contentLanguage = selectedLanguage || languages[0] || "en";
+    const contentLanguage =
+      selectedLanguage || languages[0] || INITIAL_UI_LANGUAGE;
     if (!contentLanguage) {
       toast.error("Please select a language to continue.");
       return;
@@ -275,15 +276,12 @@ const AboutTheAssignment: FC<AboutTheAssignmentProps> = ({
 
     const params = new URLSearchParams(searchParams.toString());
     params.set("lang", contentLanguage);
-    if (contentLanguage === DEFAULT_UI_LANGUAGE) {
-      params.delete("uiLang");
-    } else {
-      params.set("uiLang", contentLanguage);
-    }
+    // No `?uiLang` here: it is the content language that changes, not the UI.
+    params.delete("uiLang");
     const query = params.toString();
     router.replace(query ? `${pathname}?${query}` : pathname, undefined);
     setUserPreferedLanguage(contentLanguage);
-    setStoredUiLanguage(contentLanguage);
+    setStoredUiLanguage(INITIAL_UI_LANGUAGE);
     setLanguageModalTriggered(false);
     setToggleLanguageSelectionModal(false);
     void fetchData();
@@ -351,57 +349,53 @@ const AboutTheAssignment: FC<AboutTheAssignmentProps> = ({
 
   return (
     <>
-      <main className="flex-1 py-6 sm:py-12 px-4 sm:px-6 bg-gray-50 dark:bg-gray-900 overflow-auto">
-        <div className="max-w-4xl mx-auto space-y-6">
+      <main className="flex-1 overflow-auto px-4 py-6 sm:px-6 sm:py-12">
+        <div className="mx-auto max-w-4xl space-y-5 sm:space-y-6">
           {role === "learner" && <PromoBanner placement="preStart" />}
-          <div className="flex flex-col gap-4">
-            <div className="flex flex-col">
-              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-gray-100 leading-tight">
+          {/* Hero band: title, meta and the primary action share one loud
+              surface — the game-header treatment from a community feed. */}
+          <div className="mark-hero-lg mark-entrance flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div className="relative z-10 min-w-0">
+              <span className="inline-flex items-center gap-1.5 rounded-pill bg-white/20 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-white ring-1 ring-white/30">
+                <span className="h-1.5 w-1.5 rounded-full bg-white" />
+                {graded ? "Graded" : "Practice"}
+              </span>
+              <h1 className="mt-2 text-xl sm:text-2xl lg:text-3xl font-bold leading-tight">
                 {name}
               </h1>
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 text-gray-600 dark:text-gray-300 pt-2">
-                <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 sm:gap-x-4 sm:gap-y-2">
-                  <span className="font-medium text-sm sm:text-base">
-                    Latest attempt: {latestAttemptDate}
-                  </span>
-                  {role === "learner" && (
-                    <Link
-                      href={`/learner/${id}/attempts`}
-                      className="text-violet-600 text-sm sm:text-base hover:text-violet-700 transition-colors"
-                    >
-                      See all attempts
-                    </Link>
-                  )}
-                </div>
-                <div className="sm:hidden">
-                  <BeginTheAssignmentButton
-                    className="w-full"
-                    disabled={buttonDisabled}
-                    message={buttonMessage}
-                    label={buttonLabel}
-                    href={url}
-                  />
-                </div>
-                <div className="hidden sm:block">
-                  <BeginTheAssignmentButton
-                    className="w-auto"
-                    disabled={buttonDisabled}
-                    message={buttonMessage}
-                    label={buttonLabel}
-                    href={url}
-                  />
-                </div>
+              <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-white/85">
+                <span className="font-medium">
+                  Latest attempt: {latestAttemptDate}
+                </span>
+                {role === "learner" && (
+                  <Link
+                    href={`/learner/${id}/attempts`}
+                    className="font-medium text-white underline-offset-4 hover:underline"
+                  >
+                    See all attempts
+                  </Link>
+                )}
               </div>
               {cooldownMessage && (
-                <span className="text-red-600 font-semibold">
+                <span className="mt-2 block text-sm font-semibold text-white">
                   ({cooldownMessage})
                 </span>
               )}
             </div>
+            <div className="relative z-10 shrink-0">
+              <BeginTheAssignmentButton
+                tone="onHero"
+                className="w-full sm:w-auto"
+                disabled={buttonDisabled}
+                message={buttonMessage}
+                label={buttonLabel}
+                href={url}
+              />
+            </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 shadow rounded-lg overflow-hidden">
-            <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200 dark:border-gray-700">
+          <div className="mark-card mark-card-hover mark-entrance-1 overflow-hidden">
+            <div className="flex items-center justify-between gap-3 border-b border-gray-200/80 bg-gradient-to-r from-violet-50/70 to-transparent px-4 py-3 sm:px-6 sm:py-4 dark:border-gray-700/70 dark:from-violet-900/25">
               <h2 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-200">
                 About this assignment
               </h2>
@@ -428,34 +422,45 @@ const AboutTheAssignment: FC<AboutTheAssignmentProps> = ({
                   : "max-h-none opacity-100"
               }`}
             >
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 p-4 sm:p-6">
-                <div className="flex flex-col gap-1 text-gray-600 dark:text-gray-300">
-                  <span className="font-semibold text-sm">Assignment type</span>
-                  <span className="text-sm">
+              {/* Spec tiles — the "at a glance" strip, TapTap stat-card style. */}
+              <div className="grid grid-cols-2 gap-3 p-4 sm:grid-cols-3 sm:gap-4 sm:p-6 lg:grid-cols-5">
+                <div className="mark-spec mark-entrance-1 bg-gradient-to-br from-violet-50 to-white ring-violet-100 hover:shadow-soft dark:from-violet-900/25 dark:to-gray-800 dark:ring-violet-800/40">
+                  <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-violet-600 dark:text-violet-300">
+                    <span className="h-1.5 w-1.5 rounded-full bg-violet-500" />
+                    Assignment type
+                  </span>
+                  <span className="mt-1 block text-sm font-bold text-gray-800 dark:text-gray-100">
                     {graded ? "Graded" : "Practice"}
                   </span>
                 </div>
-                <div className="flex flex-col gap-1 text-gray-600 dark:text-gray-300">
-                  <span className="font-semibold text-sm">Time Limit</span>
-                  <span className="text-sm">
+                <div className="mark-spec mark-entrance-2 bg-gradient-to-br from-coral-50 to-white ring-coral-100 hover:shadow-soft dark:from-coral-900/25 dark:to-gray-800 dark:ring-coral-800/40">
+                  <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-coral-600 dark:text-coral-300">
+                    <span className="h-1.5 w-1.5 rounded-full bg-coral-500" />
+                    Time Limit
+                  </span>
+                  <span className="mt-1 block text-sm font-bold text-gray-800 dark:text-gray-100">
                     {allotedTimeMinutes
                       ? `${allotedTimeMinutes} minutes`
                       : "Unlimited"}
                   </span>
                 </div>
-                <div className="flex flex-col gap-1 text-gray-600 dark:text-gray-300">
-                  <span className="font-semibold text-sm">Estimated Time</span>
-                  <span className="text-sm">
+                <div className="mark-spec mark-entrance-3 bg-gradient-to-br from-mint-50 to-white ring-mint-100 hover:shadow-soft dark:from-mint-900/25 dark:to-gray-800 dark:ring-mint-800/40">
+                  <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-mint-700 dark:text-mint-300">
+                    <span className="h-1.5 w-1.5 rounded-full bg-mint-500" />
+                    Estimated Time
+                  </span>
+                  <span className="mt-1 block text-sm font-bold text-gray-800 dark:text-gray-100">
                     {timeEstimateMinutes
                       ? `${timeEstimateMinutes} minutes`
                       : "Not provided"}
                   </span>
                 </div>
-                <div className="flex flex-col gap-1 text-gray-600 dark:text-gray-300">
-                  <span className="font-semibold text-sm">
+                <div className="mark-spec mark-entrance-4 bg-gradient-to-br from-sunny-50 to-white ring-sunny-100 hover:shadow-soft dark:from-sunny-900/25 dark:to-gray-800 dark:ring-sunny-800/40">
+                  <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-sunny-700 dark:text-sunny-300">
+                    <span className="h-1.5 w-1.5 rounded-full bg-sunny-500" />
                     Assignment attempts
                   </span>
-                  <span className="text-sm">
+                  <span className="mt-1 block text-sm font-bold text-gray-800 dark:text-gray-100">
                     {normalizedNumAttempts === -1
                       ? "Unlimited"
                       : `${attemptsLeft} attempt${
@@ -463,9 +468,14 @@ const AboutTheAssignment: FC<AboutTheAssignmentProps> = ({
                         } left`}
                   </span>
                 </div>
-                <div className="flex flex-col gap-1 text-gray-600 dark:text-gray-300">
-                  <span className="font-semibold text-sm">Passing Grade</span>
-                  <span className="text-sm">{passingGrade}%</span>
+                <div className="mark-spec mark-entrance-5 bg-gradient-to-br from-violet-50 to-white ring-violet-100 hover:shadow-soft dark:from-violet-900/25 dark:to-gray-800 dark:ring-violet-800/40">
+                  <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-violet-600 dark:text-violet-300">
+                    <span className="h-1.5 w-1.5 rounded-full bg-violet-500" />
+                    Passing Grade
+                  </span>
+                  <span className="mt-1 block text-sm font-bold text-gray-800 dark:text-gray-100">
+                    {passingGrade}%
+                  </span>
                 </div>
               </div>
               <div className="border-t border-gray-200 dark:border-gray-700 px-4 sm:px-6 py-4">
@@ -520,8 +530,8 @@ const AboutTheAssignment: FC<AboutTheAssignmentProps> = ({
             if (restrictions.length === 0) return null;
 
             return (
-              <div className="bg-white dark:bg-gray-800 shadow rounded-lg overflow-hidden">
-                <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200 dark:border-gray-700">
+              <div className="mark-card mark-card-hover overflow-hidden">
+                <div className="border-b border-gray-200/80 bg-gradient-to-r from-coral-50/80 to-transparent px-4 py-3 sm:px-6 sm:py-4 dark:border-gray-700/70 dark:from-coral-900/25">
                   <h2 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-200">
                     Assignment Restrictions
                   </h2>
@@ -534,7 +544,7 @@ const AboutTheAssignment: FC<AboutTheAssignmentProps> = ({
                     {restrictions.map((restriction, index) => (
                       <div
                         key={index}
-                        className="flex items-start gap-3 p-3 border border-orange-200 dark:border-orange-900 bg-orange-50 dark:bg-orange-900/20 rounded-md"
+                        className="flex items-start gap-3 rounded-xl border border-sunny-200 bg-sunny-50 p-3 dark:border-sunny-900 dark:bg-sunny-900/20"
                       >
                         <div className="flex-shrink-0 mt-0.5">
                           <svg
@@ -632,7 +642,7 @@ const AboutTheAssignment: FC<AboutTheAssignmentProps> = ({
                   Cancel
                 </button>
                 <button
-                  className="w-full sm:w-auto px-4 py-2 bg-violet-500 text-white rounded-md disabled:opacity-50 hover:bg-violet-600 transition-colors"
+                  className="w-full sm:w-auto px-4 py-2 bg-violet-500 text-white rounded-pill shadow-soft disabled:opacity-50 hover:bg-violet-600 hover:shadow-lift transition-all"
                   onClick={handleConfirm}
                   disabled={isLoading}
                 >

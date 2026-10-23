@@ -721,7 +721,7 @@ export function AssignmentAnalyticsTable({
                         </span>
                       )}
                       {filters?.userId && (
-                        <span className="bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-200 text-xs px-2 py-1 rounded">
+                        <span className="bg-brand-100 text-brand-800 dark:bg-brand-900/30 dark:text-brand-200 text-xs px-2 py-1 rounded">
                           User: {filters.userId}
                         </span>
                       )}
@@ -797,7 +797,7 @@ export function AssignmentAnalyticsTable({
           </Card>
           <Card className="p-4">
             <div className="flex items-center gap-2">
-              <Users className="h-4 w-4 text-purple-500" />
+              <Users className="h-4 w-4 text-brand-500" />
               <div>
                 <div className="text-2xl font-bold">
                   {aggregates.totalLearnerAssignmentPairs}

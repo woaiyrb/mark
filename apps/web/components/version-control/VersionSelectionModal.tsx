@@ -650,7 +650,7 @@ export function VersionSelectionModal({
                                     workingVersion &&
                                     (version as any).originalVersion?.id ===
                                       workingVersion.id && (
-                                      <span className="px-2 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-xs rounded-full font-medium">
+                                      <span className="px-2 py-1 bg-brand-100 dark:bg-brand-900/30 text-brand-700 dark:text-brand-300 text-xs rounded-full font-medium">
                                         Current Working
                                       </span>
                                     )}

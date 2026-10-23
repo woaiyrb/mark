@@ -134,16 +134,16 @@ export const Nav: FC<NavProps> = ({ currentStepId, setCurrentStepId }) => {
               <div className="relative group">
                 <button
                   onClick={() => handleStepClick(index)}
-                  className="relative flex text-center p-3 gap-x-2.5 focus:outline-none items-center text-nowrap rounded-lg transition-all duration-200"
+                  className="relative flex text-center p-3 gap-x-2.5 focus:outline-none items-center text-nowrap rounded-pill transition-all duration-200 hover:scale-[1.03] active:scale-100 hover:bg-gray-100/80 dark:hover:bg-gray-700/60"
                 >
                   {isActive && (
-                    <div className="absolute inset-0 rounded-lg bg-violet-100 dark:bg-violet-900/30" />
+                    <div className="absolute inset-0 rounded-pill bg-brand-sheen shadow-soft" />
                   )}
 
                   <div
                     className={`w-6 h-6 flex items-center justify-center rounded-full relative z-10 transition-transform duration-200 ${
                       isActive
-                        ? "text-violet-600 drop-shadow-lg scale-125"
+                        ? "text-white scale-125"
                         : isCompleted
                           ? "text-violet-500"
                           : "text-gray-400 dark:text-gray-500"
@@ -152,7 +152,7 @@ export const Nav: FC<NavProps> = ({ currentStepId, setCurrentStepId }) => {
                     <Icon className={isActive ? "drop-shadow-sm" : ""} />
 
                     {isCompleted && !isActive && (
-                      <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full flex items-center justify-center">
+                      <div className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-mint-500 rounded-full flex items-center justify-center shadow-sm">
                         <span className="text-white text-[8px] font-bold">
                           ✓
                         </span>
@@ -163,7 +163,7 @@ export const Nav: FC<NavProps> = ({ currentStepId, setCurrentStepId }) => {
                   <span
                     className={`text-sm font-medium relative z-10 transition-all duration-200 ${
                       isActive
-                        ? "text-violet-700 dark:text-violet-300 font-bold drop-shadow-sm"
+                        ? "text-white font-bold drop-shadow-sm"
                         : isCompleted
                           ? "text-violet-600 dark:text-violet-400 font-semibold"
                           : "text-gray-500 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-200"

@@ -248,7 +248,7 @@ export function VersionTreeView({ assignmentId }: Props) {
                 row.original.isActive
                   ? "bg-green-500"
                   : row.original.isCheckedOut
-                    ? "bg-purple-500"
+                    ? "bg-brand-500"
                     : "bg-gray-400"
               }`}
             />
@@ -297,7 +297,7 @@ export function VersionTreeView({ assignmentId }: Props) {
               </span>
             )}
             {row.original.isCheckedOut && (
-              <span className="px-2 py-1 text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full flex items-center space-x-1">
+              <span className="px-2 py-1 text-xs bg-brand-100 dark:bg-brand-900/30 text-brand-700 dark:text-brand-300 rounded-full flex items-center space-x-1">
                 <Eye className="h-3 w-3" />
                 <span>Checked Out</span>
               </span>
@@ -668,7 +668,7 @@ export function VersionTreeView({ assignmentId }: Props) {
 
   return (
     <div
-      className={`fixed top-32 left-0 bottom-0 bg-gradient-to-br from-slate-50 via-purple-50 to-indigo-100 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900 flex flex-col z-30 transition-all duration-300 ease-in-out ${
+      className={`fixed top-32 left-0 bottom-0 bg-gradient-to-br from-slate-50 via-brand-50 to-indigo-100 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900 flex flex-col z-30 transition-all duration-300 ease-in-out ${
         isChatbotOpen ? "right-[25vw]" : "right-0"
       }`}
     >
@@ -708,9 +708,9 @@ export function VersionTreeView({ assignmentId }: Props) {
                     Published
                   </span>
                 </div>
-                <div className="flex items-center space-x-2 px-2 py-1 bg-purple-50 dark:bg-purple-900/20 rounded-full">
-                  <div className="w-2 h-2 rounded-full bg-purple-500"></div>
-                  <span className="text-purple-700 dark:text-purple-300 font-medium">
+                <div className="flex items-center space-x-2 px-2 py-1 bg-brand-50 dark:bg-brand-900/20 rounded-full">
+                  <div className="w-2 h-2 rounded-full bg-brand-500"></div>
+                  <span className="text-brand-700 dark:text-brand-300 font-medium">
                     Checked Out
                   </span>
                 </div>
@@ -730,8 +730,8 @@ export function VersionTreeView({ assignmentId }: Props) {
         <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
           <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700 shadow-sm">
             <div className="flex items-center space-x-3">
-              <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
-                <Hash className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+              <div className="p-2 bg-brand-100 dark:bg-brand-900/30 rounded-lg">
+                <Hash className="h-4 w-4 text-brand-600 dark:text-brand-400" />
               </div>
               <div>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -794,8 +794,8 @@ export function VersionTreeView({ assignmentId }: Props) {
 
           <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700 shadow-sm">
             <div className="flex items-center space-x-3">
-              <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
-                <FileText className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+              <div className="p-2 bg-brand-100 dark:bg-brand-900/30 rounded-lg">
+                <FileText className="h-4 w-4 text-brand-600 dark:text-brand-400" />
               </div>
               <div>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -1147,7 +1147,7 @@ export function VersionTreeView({ assignmentId }: Props) {
                               )}
                               {(selectedVersionDetails || selectedVersion)
                                 .published && (
-                                <span className="px-2 py-1 text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full">
+                                <span className="px-2 py-1 text-xs bg-brand-100 dark:bg-brand-900/30 text-brand-700 dark:text-brand-300 rounded-full">
                                   Published
                                 </span>
                               )}
@@ -1159,7 +1159,7 @@ export function VersionTreeView({ assignmentId }: Props) {
                             Questions
                           </label>
                           <div className="bg-gray-50 dark:bg-gray-900 p-3 rounded-lg flex items-center space-x-2">
-                            <Activity className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+                            <Activity className="h-4 w-4 text-brand-600 dark:text-brand-400" />
                             <span className="text-gray-900 dark:text-gray-100 font-semibold">
                               {getVersionQuestionCount(
                                 selectedVersionDetails || selectedVersion,
@@ -1174,7 +1174,7 @@ export function VersionTreeView({ assignmentId }: Props) {
                           <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                             Version Description
                           </label>
-                          <div className="bg-purple-50 dark:bg-purple-900/20  p-3 rounded-lg">
+                          <div className="bg-brand-50 dark:bg-brand-900/20  p-3 rounded-lg">
                             <p className="text-gray-900 dark:text-gray-100">
                               {
                                 (selectedVersionDetails || selectedVersion)
@@ -1192,7 +1192,7 @@ export function VersionTreeView({ assignmentId }: Props) {
 
                         <div>
                           <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2 flex items-center space-x-2">
-                            <FileText className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+                            <FileText className="h-4 w-4 text-brand-600 dark:text-brand-400" />
                             <span>Introduction</span>
                           </label>
                           <div className="quill-viewer bg-gray-50 dark:bg-gray-900 border rounded-lg p-4 max-h-40 overflow-y-auto">
@@ -1232,7 +1232,7 @@ export function VersionTreeView({ assignmentId }: Props) {
                           .gradingCriteriaOverview && (
                           <div>
                             <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2 flex items-center space-x-2">
-                              <BarChart3 className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+                              <BarChart3 className="h-4 w-4 text-brand-600 dark:text-brand-400" />
                               <span>Grading Criteria</span>
                             </label>
                             <div className="quill-viewer bg-gray-50 dark:bg-gray-900 border rounded-lg p-4 max-h-40 overflow-y-auto">
@@ -1286,7 +1286,7 @@ export function VersionTreeView({ assignmentId }: Props) {
                                           <span className="bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-200 text-xs font-medium px-2 py-1 rounded-full">
                                             Q{index + 1}
                                           </span>
-                                          <span className="bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 text-xs font-medium px-2 py-1 rounded-full">
+                                          <span className="bg-brand-100 dark:bg-brand-900/30 text-brand-800 dark:text-brand-200 text-xs font-medium px-2 py-1 rounded-full">
                                             {questionType}
                                           </span>
                                         </div>
@@ -1343,7 +1343,7 @@ export function VersionTreeView({ assignmentId }: Props) {
                         <div className="grid grid-cols-2 gap-6">
                           <div>
                             <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-3 flex items-center space-x-2">
-                              <BarChart3 className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+                              <BarChart3 className="h-4 w-4 text-brand-600 dark:text-brand-400" />
                               <span>Assignment Settings</span>
                             </label>
                             <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg space-y-3 text-sm">
@@ -1915,7 +1915,7 @@ export function VersionTreeView({ assignmentId }: Props) {
                                       </span>
                                     )}
                                     {isCheckedOut && (
-                                      <span className="px-2 py-1 text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full flex items-center space-x-1">
+                                      <span className="px-2 py-1 text-xs bg-brand-100 dark:bg-brand-900/30 text-brand-700 dark:text-brand-300 rounded-full flex items-center space-x-1">
                                         <Eye className="h-3 w-3" />
                                         <span>Checked Out</span>
                                       </span>

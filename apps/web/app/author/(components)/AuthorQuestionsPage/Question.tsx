@@ -16,14 +16,10 @@ import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import {
   ArrowPathRoundedSquareIcon,
-  ArrowUpTrayIcon,
-  Bars3BottomLeftIcon,
   CodeBracketIcon,
-  DocumentArrowUpIcon,
   DocumentChartBarIcon,
   DocumentDuplicateIcon,
   DocumentTextIcon,
-  LinkIcon,
   PencilSquareIcon,
   PlusIcon,
   PresentationChartBarIcon,
@@ -374,26 +370,6 @@ const Question: FC<QuestionProps> = ({
         value: "TRUE_FALSE",
         label: "True/False",
         icon: <IconCircleCheck className="w-5 h-5" />,
-      },
-      {
-        value: "TEXT",
-        label: "Text Response",
-        icon: <Bars3BottomLeftIcon className="w-5 h-5 stroke-gray-500" />,
-      },
-      {
-        value: "URL",
-        label: "URL Link",
-        icon: <LinkIcon className="w-5 h-5  stroke-gray-500" />,
-      },
-      {
-        value: "UPLOAD",
-        label: "File Upload",
-        icon: <DocumentArrowUpIcon className="w-5 h-5 stroke-gray-500" />,
-      },
-      {
-        value: "LINK_FILE",
-        label: "File or Link",
-        icon: <ArrowUpTrayIcon className="w-5 h-5 stroke-gray-500" />,
       },
     ],
 

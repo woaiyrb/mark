@@ -130,7 +130,7 @@ function SuccessPage() {
       <div className="justify-start items-start gap-3.5 inline-flex">
         <Link
           href={pathname.split("?")[0]}
-          className="px-4 py-2 bg-purple-700 hover:bg-purple-600 transition-colors rounded-md shadow justify-end items-center gap-2.5 flex"
+          className="px-4 py-2 bg-brand-700 hover:bg-brand-600 transition-colors rounded-md shadow justify-end items-center gap-2.5 flex"
         >
           <ExitIcon className="w-6 h-6 text-white" />
           <div className="text-white text-base font-medium">
@@ -140,7 +140,7 @@ function SuccessPage() {
         {returnUrl && (
           <Link
             href={returnUrl}
-            className="px-4 py-2 bg-purple-700 hover:bg-purple-600 transition-colors rounded-md shadow justify-end items-center gap-2.5 flex"
+            className="px-4 py-2 bg-brand-700 hover:bg-brand-600 transition-colors rounded-md shadow justify-end items-center gap-2.5 flex"
           >
             <ExitIcon className="w-6 h-6 text-white" />
             <div className="text-white text-base font-medium">

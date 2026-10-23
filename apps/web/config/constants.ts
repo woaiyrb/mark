@@ -60,6 +60,9 @@ export function getApiRoutes() {
     github: `${BASE_API_PATH}/github`,
     chats: `${getBaseApiPath("v1")}/chats`,
     aiStatus: `${getBaseApiPath("v1")}/ai-status`,
+
+    classes: `${getBaseApiPath("v1")}/classes`,
+    knowledgePoints: `${getBaseApiPath("v1")}/knowledge-points`,
   };
 }
 

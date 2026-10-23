@@ -54,7 +54,7 @@ const CheckboxWithTooltip: FC<CheckboxWithTooltipProps> = ({
       name={name}
       checked={typeof checked !== "undefined" ? checked : defaultChecked}
       onChange={(e) => onChange && onChange(e.target.checked)}
-      className="h-4 w-4 text-purple-600 border-gray-300 dark:border-gray-600 rounded"
+      className="h-4 w-4 text-brand-600 border-gray-300 dark:border-gray-600 rounded"
     />
 
     <label htmlFor={id} className="font-medium">

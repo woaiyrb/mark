@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { getStoredUiLanguage, INITIAL_UI_LANGUAGE } from "@/lib/ui-language";
 import {
   X,
   AlertTriangle,
@@ -38,15 +39,27 @@ export function VersionConflictModal({
   requestedVersion,
 }: VersionConflictModalProps) {
   const formatVersionAge = (date: Date) => {
-    const now = new Date();
-    const diffMs = now.getTime() - new Date(date).getTime();
+    // A missing/invalid timestamp used to render as "NaN days ago".
+    const parsed = new Date(date).getTime();
+    if (!Number.isFinite(parsed)) return "Unknown";
+
+    const diffMs = Date.now() - parsed;
     const diffMins = Math.floor(diffMs / 60000);
     const diffHours = Math.floor(diffMs / 3600000);
     const diffDays = Math.floor(diffMs / 86400000);
+    // Guard the plural/negative edge cases the old chain could fall through.
+    if (diffMs < 60000) return "Just now";
+    // Relative time follows the active UI language instead of being hardcoded
+    // English that the DOM translator cannot match (it keys on whole strings).
+    const language = getStoredUiLanguage() ?? INITIAL_UI_LANGUAGE;
+    const formatter = new Intl.RelativeTimeFormat(language, {
+      numeric: "auto",
+    });
 
-    if (diffMins < 60) return `${diffMins} minutes ago`;
-    if (diffHours < 24) return `${diffHours} hours ago`;
-    return `${diffDays} days ago`;
+    if (diffMs < 60000) return formatter.format(0, "minute");
+    if (diffMins < 60) return formatter.format(-diffMins, "minute");
+    if (diffHours < 24) return formatter.format(-diffHours, "hour");
+    return formatter.format(-diffDays, "day");
   };
 
   return (
