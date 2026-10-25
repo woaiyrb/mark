@@ -13,7 +13,6 @@ import { getSupportedLanguages } from "@/lib/talkToBackend";
 import {
   INITIAL_UI_LANGUAGE,
   pickDefaultAssignmentLanguage,
-  setStoredUiLanguage,
 } from "@/lib/ui-language";
 import {
   useAssignmentDetails,
@@ -281,7 +280,6 @@ const AboutTheAssignment: FC<AboutTheAssignmentProps> = ({
     const query = params.toString();
     router.replace(query ? `${pathname}?${query}` : pathname, undefined);
     setUserPreferedLanguage(contentLanguage);
-    setStoredUiLanguage(INITIAL_UI_LANGUAGE);
     setLanguageModalTriggered(false);
     setToggleLanguageSelectionModal(false);
     void fetchData();

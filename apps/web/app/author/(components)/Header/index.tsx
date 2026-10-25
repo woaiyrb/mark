@@ -36,6 +36,7 @@ import { useAssignmentFeedbackConfig } from "@/stores/assignmentFeedbackConfig";
 import { useAuthorStore } from "@/stores/author";
 import SNIcon from "@components/SNIcon";
 import ThemeToggle from "@/components/ThemeToggle";
+import UiLanguageSelector from "@/components/UiLanguageSelector";
 import Title from "@components/Title";
 import { usePathname, useRouter } from "next/navigation";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
@@ -838,6 +839,7 @@ function AuthorHeader() {
 
             <div className="flex flex-wrap items-center md:ml-auto gap-2 sm:gap-4 mt-2 md:mt-0 ml-auto">
               <ThemeToggle />
+              <UiLanguageSelector className="w-40 sm:w-52" />
               <CheckLearnerSideButton
                 disabled={!questionsAreReadyToBePublished}
               />

@@ -38,16 +38,19 @@ export function useActiveUiLanguage(): string {
     const isNewUrl = search !== lastResolvedSearch;
     lastResolvedSearch = search;
 
-    // A `?uiLang` from a shared link must not override the Chinese-only
-    // default — only the initial language is honoured.
-    if (queryLanguage === INITIAL_UI_LANGUAGE && isNewUrl) {
+    if (isSupportedUiLanguage(queryLanguage) && isNewUrl) {
       setActiveLanguage(queryLanguage);
       setStoredUiLanguage(queryLanguage);
       return;
     }
 
     // Already-consumed URL or no query language: storage is authoritative.
-    setActiveLanguage(getStoredUiLanguage() || INITIAL_UI_LANGUAGE);
+    setActiveLanguage(
+      getStoredUiLanguage() ||
+        (isSupportedUiLanguage(queryLanguage)
+          ? queryLanguage
+          : INITIAL_UI_LANGUAGE),
+    );
   }, [search, queryLanguage]);
 
   useEffect(() => {

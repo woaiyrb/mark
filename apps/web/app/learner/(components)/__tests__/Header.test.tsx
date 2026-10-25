@@ -345,25 +345,21 @@ describe("LearnerHeader uiLang URL sync", () => {
     expect(questionsRouteNavigations).toEqual([]);
   });
 
-  // The URL is not what drives translation — storage plus the change event is
-  // — so skipping the navigation must not cost the learner their language.
-  it("still records the UI language for the translator", async () => {
+  // The content language and the interface language are separate choices: the
+  // chrome follows the UI language selector, not the language the assignment
+  // is being read in. Coupling them meant a learner opening an English
+  // assignment silently lost the interface language they had picked.
+  it("leaves the stored UI language alone when the content language changes", async () => {
     mockUseParams.mockReturnValue({ assignmentId: "3428" });
     seedLearnerState(null);
+    localStorage.setItem(UI_LANGUAGE_STORAGE_KEY, "zh-CN");
     useLearnerStore.setState({ userPreferedLanguage: "it" });
 
-    const broadcast = jest.fn();
-    window.addEventListener(UI_LANGUAGE_CHANGED_EVENT, broadcast);
-    try {
-      await act(async () => {
-        render(<LearnerHeader />);
-      });
-    } finally {
-      window.removeEventListener(UI_LANGUAGE_CHANGED_EVENT, broadcast);
-    }
+    await act(async () => {
+      render(<LearnerHeader />);
+    });
 
-    expect(localStorage.getItem(UI_LANGUAGE_STORAGE_KEY)).toBe("it");
-    expect(broadcast).toHaveBeenCalled();
+    expect(localStorage.getItem(UI_LANGUAGE_STORAGE_KEY)).toBe("zh-CN");
   });
 });
 

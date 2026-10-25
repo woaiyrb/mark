@@ -7,6 +7,7 @@ import { readAuthorPreviewPayload } from "@/app/learner/utils/authorPreview";
 import Dropdown from "@/components/Dropdown";
 import Spinner from "@/components/svgs/Spinner";
 import ThemeToggle from "@/components/ThemeToggle";
+import UiLanguageSelector from "@/components/UiLanguageSelector";
 import WarningAlert from "@/components/WarningAlert";
 import type {
   QuestionAttemptRequestWithId,
@@ -25,11 +26,6 @@ import {
   getSubmitButtonStatus,
   hasLearnerResponse,
 } from "@/lib/utils";
-import {
-  isSupportedUiLanguage,
-  INITIAL_UI_LANGUAGE,
-  setStoredUiLanguage,
-} from "@/lib/ui-language";
 import {
   useAssignmentDetails,
   useGitHubStore,
@@ -571,19 +567,6 @@ function LearnerHeader() {
   ]);
 
   useEffect(() => {
-    if (!userPreferedLanguage || !isSupportedUiLanguage(userPreferedLanguage)) {
-      return;
-    }
-
-    // Chinese-only deployment: the language a learner reads the assignment in
-    // must not move the chrome. Upstream stored `userPreferedLanguage` here,
-    // which is what flipped the whole learner UI back to English whenever the
-    // assignment itself was served in English. The content language is kept
-    // (and synced to `?lang` above); only the UI stays Chinese.
-    setStoredUiLanguage(INITIAL_UI_LANGUAGE);
-  }, [userPreferedLanguage]);
-
-  useEffect(() => {
     const handleSubmitEvent = () => {
       CheckNoFlaggedQuestions();
     };
@@ -626,6 +609,7 @@ function LearnerHeader() {
           >
             <div className="flex flex-wrap items-center gap-2 flex-1 min-w-0">
               <ThemeToggle />
+              <UiLanguageSelector className="flex-1 min-w-[120px] max-w-[160px]" />
               {!isSuccessPage && (role === "learner" || isAuthorPreview) && (
                 <>
                   {languages.length > 1 ? (
@@ -721,6 +705,7 @@ function LearnerHeader() {
             className="flex items-center gap-x-4 shrink-0"
           >
             <ThemeToggle />
+            <UiLanguageSelector className="w-40" />
             {!isSuccessPage && (role === "learner" || isAuthorPreview) && (
               <>
                 {languages.length > 1 ? (
